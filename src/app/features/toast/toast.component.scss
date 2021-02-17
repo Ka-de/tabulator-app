@@ -1,0 +1,46 @@
+.toast {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    z-index: 1000;
+    right: 1vw;
+    top: 1vh;
+    width: min(100%, 300px);
+
+    &-item {
+        display: grid;
+        grid-template-rows: repeat(2, max-content);
+        gap: 0.5vw;
+        padding: 0.5vw;
+        margin: 0.5vh 0vw;
+        background-color: var(--eve);
+        position: relative;
+        color: var(--deohome);
+
+        &-title {
+            font-weight: 700;
+            font-size: min(3vw, 20px);
+        }
+
+        &-close {
+            position: absolute;
+            top: 0.5vh;
+            right: 0.5vw;
+            cursor: pointer;
+        }
+    }
+
+    &-item.is-error{
+        background-color: lighten($color: red, $amount: 25);
+    }
+
+    &-item.is-info{
+        background-color: lighten($color: blue, $amount: 30);
+    }
+
+    &-item.is-success{
+        background-color: lighten($color: green, $amount: 50);
+    }
+}

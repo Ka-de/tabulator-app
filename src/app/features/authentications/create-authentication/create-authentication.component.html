@@ -1,0 +1,20 @@
+<div class="createauthentication">
+    <form class="createauthentication-form" [formGroup]="createAuthenticationForm" (submit)="create()">
+        <span class="createauthentication-form-title">Generate a new API Key</span>
+        <div class="createauthentication-form-inputgroup">
+            <label class="createauthentication-form-inputgroup-label">Email</label>
+            <input formControlName="email" type="email" class="createauthentication-form-inputgroup-data">
+        </div>
+        <div class="createauthentication-form-controlgroup">
+            <button [disabled]='createAuthenticationForm.invalid'
+                class="createauthentication-form-controlgroup-button">Generate</button>
+        </div>
+
+        <span *ngIf="createdAuthentication" class="createauthentication-form-key">
+            <input #Key class="createauthentication-form-key-text"
+                [value]="createdAuthentication.publickey">
+            <i class="fa fa-copy createauthentication-form-key-copy" (click)="copyKey(Key)"></i>
+        </span>
+    </form>
+
+</div>

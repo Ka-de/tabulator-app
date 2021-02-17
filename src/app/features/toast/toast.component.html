@@ -1,0 +1,13 @@
+<div *ngIf="notifications" class="toast">
+    <span *ngFor="let notification of notifications | async; let i=index" class="toast-item" [ngClass]="
+        {
+            'is-error': notification.type === 'error',
+            'is-info': notification.type === 'info',
+            'is-success': notification.type === 'success'
+        }
+    ">
+        <h4 class="toast-item-title">{{notification.title}}</h4>
+        <p class="toast-item-details">{{notification.details}}</p>
+        <i class="fa fa-times toast-item-close" (click)="dismis(i)"></i>
+    </span>
+</div>
