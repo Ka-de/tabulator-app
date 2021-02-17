@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "@env/environment";
 import { Observable } from "rxjs";
@@ -24,6 +24,6 @@ export class AuthenticationService {
   }
 
   create(data: AuthenticationDTO) {
-    return this.resolve<Authentication>('POST', '', data);
+    return this.resolve<Authentication>('Post', '', data);
   }
 }
