@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { copyElementText } from '@app/utils/shared/copy.utils';
+import { copyElementText } from '@app/utils/copy.utils';
 import { Authentication, AuthenticationDTO } from '../authentications.model';
 import { AuthenticationService } from '../authentications.service';
 

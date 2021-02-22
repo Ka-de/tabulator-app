@@ -1,0 +1,88 @@
+<div class="lists">
+    <menu class="lists-menu">
+        <span class="lists-menu-item">View</span>
+        <span class="lists-menu-item">List</span>
+    </menu>
+
+    <div class="lists-window">
+        <section class="lists-sidebar" #Sidebar (click)="openSidebar(Sidebar, ToggleSidebar)">
+            <span class="lists-sidebar-header">
+                <i class="fa fa-home lists-sidebar-header-icon"></i>
+                <p class="lists-sidebar-header-text hide">My Lists</p>
+            </span>
+            <span class="lists-sidebar-menu">
+                <i class="fa fa-undo lists-sidebar-menu-sync"></i>
+                <span class="hide">
+                    <span class="lists-sidebar-menu-count">
+                        <span class="lists-sidebar-menu-count-number">9</span>
+                        <span class="lists-sidebar-menu-count-name">Lists</span>
+                    </span>
+                </span>
+            </span>
+            <span class="lists-sidebar-search">
+                <i class="fa fa-search lists-sidebar-search-icon"></i>
+                <input type="text" class="lists-sidebar-search-box hide" placeholder="filter">
+            </span>
+            <span class="lists-sidebar-pane hide">
+                <span class="lists-sidebar-pane-tab">
+                    <button class="lists-sidebar-pane-tab-button"
+                        (click)="currentPane ='collections'">Collections</button>
+                    <button class="lists-sidebar-pane-tab-button" (click)="currentPane ='tables'">Tables</button>
+                </span>
+                <span *ngIf="showPane('collections')" class="lists-sidebar-pane-window">
+                    <span class="lists-sidebar-pane-window-wrapper">
+                        <span #Table *ngFor="let table of [1, 2, 3, 4, 5]"
+                            class="lists-sidebar-pane-window-wrapper-item"
+                            (mouseleave)="CollectionControl.style.display='none'"
+                            (mouseenter)="CollectionControl.style.display='flex'">
+                            <i class="fa fa-angle-right lists-sidebar-pane-window-wrapper-item-icon"></i>
+                            Collection {{table}}
+                            <span #CollectionControl style="display: none;"
+                                class="lists-sidebar-pane-window-wrapper-item-control">
+                                <i class="fa fa-plus lists-sidebar-pane-window-wrapper-item-icon"></i>
+                                <i class="fa fa-trash lists-sidebar-pane-window-wrapper-item-icon"
+                                    (click)="Table.remove()"></i>
+                            </span>
+                        </span>
+                    </span>
+
+                    <span class="lists-sidebar-pane-window-new" (mouseleave)="CreateCollection.style.display='none'"
+                        (mouseenter)="CreateCollection.style.display='flex'">
+                        <i class="fa fa-plus"></i>
+                        <span style="display: none;" #CreateCollection>Create Collection</span>
+                    </span>
+                </span>
+
+                <span class="lists-sidebar-pane-window" *ngIf="showPane('tables')">
+                    <span class="lists-sidebar-pane-window-wrapper">
+                        <span #Table *ngFor="let table of [1, 2, 3, 4, 5]"
+                            class="lists-sidebar-pane-window-wrapper-item"
+                            (mouseleave)="TableControl.style.display='none'"
+                            (mouseenter)="TableControl.style.display='flex'">
+                            <i class="fa fa-angle-right lists-sidebar-pane-window-wrapper-item-icon"></i>
+                            Table {{table}}
+                            <span #TableControl style="display: none;"
+                                class="lists-sidebar-pane-window-wrapper-item-control">
+                                <i class="fa fa-trash lists-sidebar-pane-window-wrapper-item-icon"
+                                    (click)="Table.remove()"></i>
+                            </span>
+                        </span>
+                    </span>
+
+                    <span class="lists-sidebar-pane-window-new" (mouseleave)="CreateTable.style.display='none'"
+                        (mouseenter)="CreateTable.style.display='flex'">
+                        <i class="fa fa-plus"></i>
+                        <span style="display: none;" #CreateTable>Create Table</span>
+                    </span>
+                </span>
+            </span>
+        </section>
+        <section class="lists-container">
+            <div class="lists-container-header">
+                <i #ToggleSidebar class="lists-container-header-sidebarcontrol fa fa-angle-left"
+                    (click)="toggleSidebar(Sidebar, ToggleSidebar)"></i>
+                <span class="lists-container-header-name">CraterList 0.0.0</span>
+            </div>
+        </section>
+    </div>
+</div>

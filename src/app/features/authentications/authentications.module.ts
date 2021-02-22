@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AuthenticationsComponent } from './authentications.component';
 import { AuthenticationService } from './authentications.service';
 import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from '@app/utils/shared/shared.module';
+import { SharedModule } from '@app/utils/shared.module';
 import { CreateAuthenticationComponent } from './create-authentication/create-authentication.component';
 
 const routes: Routes = [

@@ -12,7 +12,19 @@ export class AuthenticationService {
     private http: HttpClient,
   ) { }
 
+  resolve<T>(method: string, endpoint: string, data?: any): Observable<T> {
+    let url = `${this.api}/${endpoint}`;
+
+    return this.http.request<T>(method, url, {
+      headers: {
+        // authorization: `Creeper ${this.authApi.token}`,
+        
+      },
+      body: data
+    });
+  }
+
   create(data: AuthenticationDTO) {
-    return this.http.post<Authentication>(this.api, data);
+    return this.resolve<Authentication>('Post', '', data);
   }
 }
