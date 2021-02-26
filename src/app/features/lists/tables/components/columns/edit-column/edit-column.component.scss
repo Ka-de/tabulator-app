@@ -1,0 +1,48 @@
+.column-form {
+    display: grid;
+    grid-template-rows: 1fr max-content;
+    gap: 2vh;
+    height: 100%;
+
+    &-inputs {
+        display: grid;
+        grid-template-rows: max-content;
+        gap: 1.5vh;
+        align-content: flex-start;
+        height: 100%;
+        padding: 1vh 1vw;
+
+        &-group{
+            display: grid;
+            grid-template-rows: max-content max-content;
+            align-content: flex-start;
+            gap: .2vh;
+
+            &-label{
+
+            }   
+            
+            &-text, &-select{
+                height: 40px;
+                padding: 0px 10px;
+            }
+        }
+    }
+
+    &-controls{
+        padding: 1vh 1vw;
+        display: flex;
+        box-shadow: 1px 1px 3px var(--minor-color);
+
+        &-button{
+            padding: 10px;
+            border: 1px solid var(--minor-color);
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        &-button:disabled{
+            cursor: none;
+        }
+    }
+}

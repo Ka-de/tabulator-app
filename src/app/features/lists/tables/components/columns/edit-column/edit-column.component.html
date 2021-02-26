@@ -1,0 +1,31 @@
+<form (submit)="updateColumn(columnForm.value)" class="column-form" #columnForm="ngForm">
+    <div class="column-form-inputs">
+        <span class="column-form-inputs-group">
+            <label class="column-forms-inputs-group-label">Name *</label>
+            <input class="column-form-inputs-group-text" [ngModel]="column.name" name="name" required>
+        </span>
+        <span class="column-form-inputs-group">
+            <label class="column-forms-inputs-group-label">Description</label>
+            <input class="column-form-inputs-group-text" [ngModel]="column.description" name="description">
+        </span>
+        <span class="column-form-inputs-group">
+            <label class="column-forms-inputs-group-label">Type</label>
+            <select class="column-form-inputs-group-select" [ngModel]="column.datatype" name="datatype" required>
+                <option *ngFor="let type of dataTypes">{{type}}</option>
+            </select>
+        </span>
+        <span class="column-form-inputs-group">
+            <label class="column-forms-inputs-group-label">Required</label>
+            <input class="column-form-inputs-group-checkbox" type="checkbox" [ngModel]="column.required"
+                name="required">
+        </span>
+        <span class="column-form-inputs-group">
+            <label class="column-forms-inputs-group-label">Unique</label>
+            <input class="column-form-inputs-group-checkbox" type="checkbox" [ngModel]="column.unique" name="unique">
+        </span>
+    </div>
+    <div class="column-form-controls">
+        <button class="column-form-controls-button" [disabled]="columnForm.invalid">Save</button>
+        <button class="column-form-controls-button">Cancel</button>
+    </div>
+</form>

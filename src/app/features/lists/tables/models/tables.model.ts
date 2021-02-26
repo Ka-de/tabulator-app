@@ -3,6 +3,7 @@ import { TableRow } from "./tables-rows.model";
 
 export interface TableEditable {
     title: string;
+    description?: string;
 }
 
 export interface TableDTO extends TableEditable {
@@ -27,16 +28,18 @@ export enum TableDataTypes {
     COLLECTION = "collection"
 }
 
-export interface TableColumnEntity<C> {
-    [name: string]: C;
-}
-
-export interface Table {
-    title: string;
+export interface Table extends TableEditable {
     attatchments: string[];
     length: number;
     itemsLength: number;
     version: string;
     columns: TableColumn[];
     rows: TableRow[];
+    _id: string;
+}
+
+export enum TableEvents {
+    VIEW = "view",
+    EDIT = "edit",
+    DELETE = "delete"
 }

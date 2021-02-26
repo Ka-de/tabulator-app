@@ -1,5 +1,6 @@
 import { ToastService } from "@app/features/toast/toast.service";
-import { Table, TableColumnEntity } from "../models/tables.model";
+import { Entity } from "@app/utils/custom.type";
+import { Table } from "../models/tables.model";
 import { TableColumnDTO } from "./tables.dto";
 
 export class TableRowDTO {
@@ -9,7 +10,7 @@ export class TableRowDTO {
         table: Table,
         toastService: ToastService
     ) {
-        const columnEntity: TableColumnEntity<TableColumnDTO> = table.columns.reduce((acc, column) =>
+        const columnEntity: Entity<TableColumnDTO> = table.columns.reduce((acc, column) =>
             ({ ...acc, [column.name]: column }), {});
         for (let i in columnEntity) {
             if (columnEntity[i].required && !(data as any)[i]) toastService.showMessage({

@@ -22,13 +22,18 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.subscriptions.add(
       this.store.select(state => state.error).subscribe(
-        errors => this.showError
+        errors => this.showError(errors.errors)
       )
-    )
+    );
   }
 
-  showError(error: any) {
-    console.log(error);
-    
+  showError(errors: any) {
+    if (errors) {
+      this.toastService.showMessage({
+        type: 'error',
+        title: 'Error Occurred',
+        details: errors.message || 'Internal Server Error'
+      })
+    }
   }
 }

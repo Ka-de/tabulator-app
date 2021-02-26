@@ -24,6 +24,7 @@
         grid-template-rows: 1fr;
         align-content: flex-start;
         height: 100%;
+        overflow: hidden;
     }
 
     &-sidebar {
@@ -202,9 +203,10 @@
     &-container {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: max-content max-content 1fr;
+        grid-template-rows: max-content 1fr;
         align-content: flex-start;
         height: 100%;
+        overflow: hidden;
 
         &-header {
             display: grid;
@@ -230,6 +232,13 @@
                 justify-content: flex-end;
                 padding-right: 1vw;
             }
+        }
+
+        &-wrapper{
+            height: 100%;
+            width: 100%;
+            display: block;
+            overflow: hidden;
         }
     }
 }

@@ -1,4 +1,4 @@
-import { TableDataTypes } from "../models/tables.model";
+import { TableDataTypes } from "@app/features/lists/tables/models/tables.model";
 
 export interface TableColumnDTO {
     name: string;

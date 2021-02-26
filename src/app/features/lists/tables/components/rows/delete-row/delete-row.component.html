@@ -1,0 +1,9 @@
+<div *ngIf="table && row" class="delete-row">
+    <span class="delete-row-note">
+        This row in table ({{table.title}}) will be deleted
+    </span>
+    <span class="delete-row-continue">
+        Click delete to continue
+        <button class="delete-row-continue-button" (click)="deleteRow()">Continue</button>
+    </span>
+</div>

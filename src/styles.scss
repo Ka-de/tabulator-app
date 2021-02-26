@@ -15,3 +15,26 @@ body {
     background-color: var(--major-color);
     color: var(--minor-color);
 }
+
+.table-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    position: absolute;
+    background-color: var(--minor-color);
+    color: var(--major-color);
+    top: 0;
+    right: 0;
+
+    &-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1vw 1vh;
+        cursor: pointer;
+    }
+
+    &-item:hover{
+        color: var(--extra-color);
+    }
+}

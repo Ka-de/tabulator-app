@@ -1,0 +1,30 @@
+<form (submit)="createColumn()" class="column-form" [formGroup]="columnForm">
+    <div class="column-form-inputs">
+        <span class="column-form-inputs-group">
+            <label class="column-forms-inputs-group-label">Name *</label>
+            <input class="column-form-inputs-group-text" formControlName="name">
+        </span>
+        <span class="column-form-inputs-group">
+            <label class="column-forms-inputs-group-label">Description</label>
+            <input class="column-form-inputs-group-text" formControlName="description">
+        </span>
+        <span class="column-form-inputs-group">
+            <label class="column-forms-inputs-group-label">Type</label>
+            <select class="column-form-inputs-group-select" formControlName="datatype">
+                <option *ngFor="let type of dataTypes">{{type}}</option>
+            </select>
+        </span>
+        <span class="column-form-inputs-group">
+            <label class="column-forms-inputs-group-label">Required</label>
+            <input class="column-form-inputs-group-checkbox" type="checkbox" formControlName="required">
+        </span>
+        <span class="column-form-inputs-group">
+            <label class="column-forms-inputs-group-label">Unique</label>
+            <input class="column-form-inputs-group-checkbox" type="checkbox" formControlName="unique">
+        </span>
+    </div>
+    <div class="column-form-controls">
+        <button class="column-form-controls-button" [disabled]="columnForm.invalid">Create</button>
+        <button class="column-form-controls-button">Cancel</button>
+    </div>
+</form>

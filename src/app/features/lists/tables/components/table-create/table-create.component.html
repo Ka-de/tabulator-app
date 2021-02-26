@@ -1,0 +1,19 @@
+<div class="create-table">
+    <form (submit)="createTable()" [formGroup]="tableForm" class="create-table-form">
+        <div class="create-table-form-group">
+            <span class="create-table-form-group-input">
+                <label class="create-table-form-group-input-label">Title *</label>
+                <input type="text" class="create-table-form-group-input-data" formControlName="title">
+            </span>
+
+            <span class="create-table-form-group-input">
+                <label class="create-table-form-group-input-label">Description</label>
+                <textarea rows="4" class="create-table-form-group-input-data" formControlName="description"></textarea>
+            </span>
+
+            <span class="create-table-form-group-submit">
+                <button [disabled]="tableForm.invalid" class="create-table-form-group-submit-button">Create</button>
+            </span>
+        </div>
+    </form>
+</div>

@@ -1,8 +1,9 @@
 import { Action } from "@ngrx/store";
+import { TableRowDTO } from "../dtos/tables-row.dto";
 import { TableColumnDTO } from "../dtos/tables.dto";
 import { TableColumn } from "../models/tables-column.model";
 import { TableRow } from "../models/tables-rows.model";
-import { Table, TableDTO } from "../models/tables.model";
+import { Table, TableDTO, TableEditable } from "../models/tables.model";
 
 export enum TablesActionsType {
     GET_TABLES = "[TABLES] Get",
@@ -69,6 +70,16 @@ export class CreateTableSuccess implements Action {
     constructor(public payload: Table) { }
 }
 
+export class UpdateTable implements Action {
+    readonly type = TablesActionsType.UPDATE_TABLE;
+    constructor(public payload: { _id: string, data: Partial<TableDTO> }) { }
+}
+
+export class UpdateTableSuccess implements Action {
+    readonly type = TablesActionsType.UPDATE_TABLE_SUCCESS;
+    constructor(public payload: { _id: string, edited: Partial<TableEditable> }) { }
+}
+
 export class DeleteTable implements Action {
     readonly type = TablesActionsType.DELETE_TABLE;
     constructor(public payload: string) { }
@@ -76,67 +87,67 @@ export class DeleteTable implements Action {
 
 export class DeleteTableSuccess implements Action {
     readonly type = TablesActionsType.DELETE_TABLE_SUCCESS;
-    constructor(public payload: Table) { }
+    constructor(public payload: string) { }
 }
 
 export class CreateTableColumn implements Action {
     readonly type = TablesActionsType.CREATE_TABLE_COLUMN;
-    constructor(public payload: TableColumnDTO) { }
+    constructor(public payload: { _id: string, data: TableColumnDTO }) { }
 }
 
 export class CreateTableColumnSuccess implements Action {
     readonly type = TablesActionsType.CREATE_TABLE_COLUMN_SUCCESS;
-    constructor(public payload: TableColumn) { }
+    constructor(public payload: { _id: string, column: TableColumn }) { }
 }
 
 export class UpdateTableColumn implements Action {
     readonly type = TablesActionsType.UPDATE_TABLE_COLUMN;
-    constructor(public payload: string) { }
+    constructor(public payload: { _id: string, column_id: string, data: Partial<TableColumnDTO> }) { }
 }
 
 export class UpdateTableColumnSuccess implements Action {
     readonly type = TablesActionsType.UPDATE_TABLE_COLUMN_SUCCESS;
-    constructor(public payload: TableColumn) { }
+    constructor(public payload: { _id: string, column: TableColumn }) { }
 }
 
 export class DeleteTableColumn implements Action {
     readonly type = TablesActionsType.DELETE_TABLE_COLUMN;
-    constructor(public payload: string) { }
+    constructor(public payload: { _id: string, column_id: string }) { }
 }
 
 export class DeleteTableColumnSuccess implements Action {
     readonly type = TablesActionsType.DELETE_TABLE_COLUMN_SUCCESS;
-    constructor(public payload: string) { }
+    constructor(public payload: { _id: string, column_id: string }) { }
 }
 
 export class CreateTableRow implements Action {
     readonly type = TablesActionsType.CREATE_TABLE_ROW;
-    constructor(public payload: string) { }
+    constructor(public payload: { _id: string, data: TableRowDTO }) { }
 }
 
 export class CreateTableRowSuccess implements Action {
     readonly type = TablesActionsType.CREATE_TABLE_ROW_SUCCESS;
-    constructor(public payload: TableRow) { }
+    constructor(public payload: { _id: string, row: TableRow }) { }
 }
 
 export class UpdateTableRow implements Action {
     readonly type = TablesActionsType.UPDATE_TABLE_ROW;
-    constructor(public payload: string) { }
+    constructor(public payload: { _id: string, row_id: string, data: Partial<TableRowDTO> }) { }
 }
 
 export class UpdateTableRowSuccess implements Action {
     readonly type = TablesActionsType.UPDATE_TABLE_ROW_SUCCESS;
-    constructor(public payload: TableRow) { }
+    constructor(public payload: { _id: string, row: TableRow }) { }
 }
 
 export class DeleteTableRow implements Action {
     readonly type = TablesActionsType.DELETE_TABLE_ROW;
-    constructor(public payload: string) { }
+    constructor(public payload: { _id: string, row_id: string }) { }
 }
 
 export class DeleteTableRowSuccess implements Action {
     readonly type = TablesActionsType.DELETE_TABLE_ROW_SUCCESS;
-    constructor(public payload: string) { }
+    constructor(public payload: { _id: string, row_id: string }) { }
 }
 
 export type TablesAction = Action;

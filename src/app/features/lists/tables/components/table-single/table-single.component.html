@@ -1,0 +1,124 @@
+<div *ngIf="table" class="table-single">
+    <header class="table-single-header">
+        <span class="table-single-header-details">
+            <span class="table-single-header-details-title">{{table.title}}</span>
+            <span class="table-single-header-details-descriptions">
+                <span class="table-single-header-details-descriptions-item">
+                    <span class="table-single-header-details-descriptions-item-name">Rows</span>
+                    <span class="table-single-header-details-descriptions-item-value">{{table.rows.length}}</span>
+                </span>
+                <span class="table-single-header-details-descriptions-item">
+                    <span class="table-single-header-details-descriptions-item-name">Total Size</span>
+                    <span class="table-single-header-details-descriptions-item-value">{{table.rows.length}}</span>
+                </span>
+                <span class="table-single-header-details-descriptions-item">
+                    <span class="table-single-header-details-descriptions-item-name">Avg. Size</span>
+                    <span class="table-single-header-details-descriptions-item-value">{{table.rows.length}}</span>
+                </span>
+            </span>
+        </span>
+        <span class="table-single-header-controls">
+            <span class="table-single-header-controls-item">Rows</span>
+        </span>
+    </header>
+    <menu class="table-single-menu">
+        <button class="table-single-menu-button" (click)="popupService.open('add-column')">
+            <i class="fa fa-plus table-single-menu-button-icon"></i>
+            <span class="table-single-menu-button-text">Add Column</span>
+        </button>
+        <button class="table-single-menu-button" (click)="popupService.open('add-row')">
+            <i class="fa fa-arrow-up table-single-menu-button-icon"></i>
+            <span class="table-single-menu-button-text">Insert Row</span>
+        </button>
+        <button class="table-single-menu-button" (click)="popupService.open('edit-table')">
+            <i class="fa fa-pencil table-single-menu-button-icon"></i>
+            <span class="table-single-menu-button-text">Edit Table</span>
+        </button>
+        <button class="table-single-menu-button" (click)="popupService.open('delete-table')">
+            <i class="fa fa-trash table-single-menu-button-icon"></i>
+            <span class="table-single-menu-button-text">Delete Table</span>
+        </button>
+    </menu>
+    <main class="table-single-main">
+        <span class="table-single-main-path">
+
+        </span>
+        <table class="table-single-main-list">
+            <thead class="table-single-main-list-thead">
+                <tr class="table-single-main-list-thead-tr">
+                    <th class="table-single-main-list-thead-tr-th" *ngFor="let column of table.columns">
+                        <span class="table-single-main-list-thead-tr-th-wrapper">
+                            <span>
+                                {{column.name}}
+                            </span>
+                            <span (mouseenter)="selectedColumn = column; displayColumnOptions = true"
+                                (mouseleave)="displayColumnOptions = false">
+                                <i class="fa fa-ellipsis-v table-single-main-list-thead-tr-th-wrapper-toggle"></i>
+                                <span *ngIf="showColumnOptions(column)"
+                                    class="table-single-main-list-thead-tr-th-wrapper-options">
+                                    <p class="table-single-main-list-thead-tr-th-wrapper-options-item">
+                                        Sort By
+                                    </p>
+                                    <p (click)="popupService.open('edit-column')"
+                                        class="table-single-main-list-thead-tr-th-wrapper-options-item">
+                                        Edit
+                                    </p>
+                                    <p class="table-single-main-list-thead-tr-th-wrapper-options-item">
+                                        Clone
+                                    </p>
+                                    <p (click)="popupService.open('delete-column')" class="
+                                    table-single-main-list-thead-tr-th-wrapper-options-item">
+                                        Delete
+                                    </p>
+                                </span>
+                            </span>
+                        </span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="table-single-main-list-tbody">
+                <tr class="table-single-main-list-tbody-tr" *ngFor="let row of rows" #TableRow
+                    (mouseenter)="selectedRow = row; displayRowOptions = true" (mouseleave)="displayRowOptions = false">
+                    <td class="table-single-main-list-tbody-tr-td" *ngFor="let column of table.columns">
+                        {{row[column.name]}}</td>
+                    <span *ngIf="showRowOptions(row)" class="table-options">
+                        <i class="table-options-item fa fa-pencil" (click)="popupService.open('edit-row');"></i>
+                        <i class="table-options-item fa fa-trash" (click)="popupService.open('delete-row')"></i>
+                    </span>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+
+<app-popup id="add-column" heading="Create a Column" *ngIf="table">
+    <app-create-column [table]="table"></app-create-column>
+</app-popup>
+
+<app-popup *ngIf="table && selectedColumn" id="edit-column" heading="Edit Column">
+    <app-edit-column [column]="selectedColumn" [table]="table"></app-edit-column>
+</app-popup>
+
+<app-popup *ngIf="table && selectedColumn" id="delete-column" heading="Delete Column">
+    <app-delete-column [column]="selectedColumn" [table]="table"></app-delete-column>
+</app-popup>
+
+<app-popup id="add-row" heading="Insert a Row">
+    <app-create-row [table]="table"></app-create-row>
+</app-popup>
+
+<app-popup id="edit-row" heading="Edit Row">
+    <app-edit-row *ngIf="table && selectedRow" [row]="selectedRow" [table]="table"></app-edit-row>
+</app-popup>
+
+<app-popup *ngIf="table && selectedRow" id="delete-row" heading="Delete Row">
+    <app-delete-row [row]="selectedRow" [table]="table"></app-delete-row>
+</app-popup>
+
+<app-popup id="edit-table" heading="Edit Table" *ngIf="table">
+    <app-table-edit [table]="table"></app-table-edit>
+</app-popup>
+
+<app-popup id="delete-table" heading="Delete Table" *ngIf="table">
+    <app-table-delete [table]="table"></app-table-delete>
+</app-popup>

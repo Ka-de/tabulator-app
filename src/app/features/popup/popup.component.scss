@@ -1,0 +1,57 @@
+app-popup {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(107, 23, 23, 0.205);
+    z-index: 999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    display: none;
+
+    .popup {
+        display: grid;
+        grid-template-rows: max-content 1fr;
+        grid-template-columns: 1fr;
+        overflow: auto;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        background-color: white;
+
+        &-header {
+            display: flex;
+            justify-content: space-between;
+            padding: .5em;
+            width: calc(100% - 1em);
+            font-size: min(30px, 4vw);
+
+            &-title {
+                font-weight: 700;
+            }
+
+            &-close {
+                justify-self: flex-end;
+            }
+        }
+
+        &-body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+    }
+}
+
+.popup-open {
+    overflow: hidden;
+}
+
+@media (min-width: 600px) {
+    app-popup {
+        .popup {
+            width: min(600px, 40%);
+            float: right;
+        }
+    }
+}

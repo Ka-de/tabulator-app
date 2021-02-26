@@ -6,4 +6,5 @@ export interface TableColumn {
     datatype: TableDataTypes;
     required?: boolean;
     unique?: boolean;
+    description?: string;
 }

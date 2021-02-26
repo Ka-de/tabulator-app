@@ -1,0 +1,30 @@
+.delete-row {
+    display: grid;
+    grid-template-rows: max-content max-content;
+    height: 100%;
+    align-content: center;
+    justify-items: center;
+    gap: 2vh;
+    padding: 0vh 1vw;
+
+    &-note {
+        letter-spacing: 0.05em;
+        font-weight: 600;
+    }
+
+    &-continue {
+        display: grid;
+        justify-content: left;
+        align-items: center;
+        grid-template-columns: repeat(2, max-content);
+        gap: 1vw;
+
+        &-button {
+            padding: 0.5vh 1vw;
+            border: none;
+            color: var(--major-color);
+            background-color: var(--extra-color);
+            cursor: pointer;
+        }
+    }
+}

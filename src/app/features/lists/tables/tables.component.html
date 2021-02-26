@@ -1,0 +1,50 @@
+<div class="tables">
+    <header class="tables-header">
+        <span class="tables-header-title">Tables</span>
+        <span class="tables-header-controls">
+            <span class="tables-header-controls-item" (click)="popupService.open('create-table')">Create Table</span>
+        </span>
+    </header>
+
+    <main class="tables-main">
+        <table class="tables-main-list" *ngIf="tables">
+            <thead class="tables-main-list-thead">
+                <tr class="tables-main-list-thead-tr">
+                    <th class="tables-main-list-thead-tr-th">Table Name</th>
+                    <th class="tables-main-list-thead-tr-th">Rows</th>
+                    <th class="tables-main-list-thead-tr-th">Avg. Row Size</th>
+                    <th class="tables-main-list-thead-tr-th">Total Row Size</th>
+                </tr>
+            </thead>
+            <tbody class="tables-main-list-tbody">
+                <tr class="tables-main-list-tbody-tr" *ngFor="let table of tables" #TableRow
+                    (mouseenter)="selectedTable = table;">
+                    <td class="tables-main-list-tbody-tr-td">{{table.title}}</td>
+                    <td class="tables-main-list-tbody-tr-td">{{table.rows.length}}</td>
+                    <td class="tables-main-list-tbody-tr-td">{{table.rows.length}}</td>
+                    <td class="tables-main-list-tbody-tr-td">{{table.rows.length}}</td>
+
+                    <span #TableOptions *ngIf="showOption(table)" class="table-options">
+                        <i class="table-options-item fa fa-eye" (click)="emitTableEvent(tableEvents.VIEW)"></i>
+                        <i class="table-options-item fa fa-pencil"
+                            (click)="popupService.open('edit-table')"></i>
+                        <i class="table-options-item fa fa-trash"
+                            (click)="popupService.open('delete-table')"></i>
+                    </span>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+
+<app-popup id="create-table" heading="Create Table">
+    <app-table-create></app-table-create>
+</app-popup>
+
+<app-popup id="edit-table" heading="Edit Table">
+    <app-table-edit [table]="selectedTable"></app-table-edit>
+</app-popup>
+
+<app-popup *ngIf="selectedTable" id="delete-table" heading="Delete Table">
+    <app-table-delete [table]="selectedTable"></app-table-delete>
+</app-popup>
