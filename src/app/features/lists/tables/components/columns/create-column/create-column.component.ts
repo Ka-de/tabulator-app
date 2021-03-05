@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PopupService } from '@app/features/popup';
 import { ToastService } from '@app/features/toast/toast.service';
@@ -9,23 +9,27 @@ import { TableColumnDTO } from '@app/features/lists/tables/dtos/tables.dto';
 import { Table, TableDataTypes } from '@app/features/lists/tables/models/tables.model';
 import { CreateTableColumn, TablesActionsType } from '@app/features/lists/tables/tables-store/tables.action';
 import { selectCurrentTable } from '../../../tables-store/tables.selector';
+import { last, take, withLatestFrom } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-column',
   templateUrl: './create-column.component.html',
   styleUrls: ['./create-column.component.scss']
 })
-export class CreateColumnComponent implements OnInit {
-  @Input() table!: Table;
+export class CreateColumnComponent implements OnInit, OnDestroy {
+  @Input() data!: { table: Table };
   dataTypes = Object.values(TableDataTypes);
   columnForm!: FormGroup;
   subscriptions = new Subscription();
 
+  type!: string;
+  attributes!: any;
+
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
-    private toastService: ToastService,
-    private popupService: PopupService
+    private popupService: PopupService,
   ) { }
 
   ngOnInit(): void {
@@ -36,26 +40,22 @@ export class CreateColumnComponent implements OnInit {
       required: [],
       unique: []
     });
+  }
 
-    this.subscriptions.add(
-      this.store.select(state => state.tables).subscribe(
-        tables => {
-          if (tables.loaded && tables.action == TablesActionsType.CREATE_TABLE_COLUMN) {
-            this.toastService.showMessage({
-              title: 'Create column',
-              details: 'Column creation was successful',
-              type: 'success'
-            });
-
-            this.popupService.close('add-column');
-          }
-        }
-      )
-    );
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   createColumn() {
-    const data: TableColumnDTO = this.columnForm.getRawValue();
-    this.store.dispatch(new CreateTableColumn({ _id: this.table._id, data }));
+    const data: TableColumnDTO = { ...this.columnForm.getRawValue(), attributes: this.attributes };
+    this.store.dispatch(new CreateTableColumn({ _id: this.data.table._id, data }));
+  }
+
+  setAttributes(event: any) {
+    this.attributes = event;
+  }
+
+  close() {
+    this.popupService.close('add-column');
   }
 }

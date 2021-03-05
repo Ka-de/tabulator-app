@@ -19,10 +19,7 @@ export class TableCreateComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private store: Store<AppState>,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private toastService: ToastService
+    private store: Store<AppState>
   ) { }
 
   ngOnInit(): void {
@@ -30,26 +27,6 @@ export class TableCreateComponent implements OnInit {
       title: ['', Validators.required],
       description: ['']
     });
-
-    this.subscriptions.add(
-      this.store.select(state => state.tables).subscribe(
-        tables => {
-          if (tables.loaded && tables.action == TablesActionsType.CREATE_TABLE) {
-            this.toastService.showMessage({
-              title: 'Table Creation',
-              details: 'Table creation was successful, navigating to table',
-              type: 'success'
-            });
-
-            this.store.select(selectCurrentTable).subscribe(
-              table => {
-                if (table) this.router.navigate([table._id], { relativeTo: this.activatedRoute });
-              }
-            );
-          }
-        }
-      )
-    )
   }
 
   createTable() {

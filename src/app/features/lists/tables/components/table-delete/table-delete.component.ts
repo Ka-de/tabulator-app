@@ -15,7 +15,7 @@ import { selectCurrentTable } from '@app/features/lists/tables/tables-store/tabl
   styleUrls: ['./table-delete.component.scss']
 })
 export class TableDeleteComponent implements OnInit, OnDestroy {
-  @Input('table') table!: Table;
+  data!: { table: Table };
   subscriptions = new Subscription();
 
   constructor(
@@ -26,22 +26,8 @@ export class TableDeleteComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.subscriptions.add(
-      this.store.select(state => state.tables).subscribe(
-        tables => {
-          if (tables.action == TablesActionsType.DELETE_TABLE && tables.loaded) {
-            this.toastService.showMessage({
-              type: 'success',
-              title: 'Table Deletion',
-              details: 'Table was deleted successfully.'
-            });
-
-            this.popupService.close('delete-table');
-            this.router.navigate(['/lists/tables']);
-          }
-        }
-      )
-    );
+    console.log(this.data);
+    
   }
 
   ngOnDestroy() {
@@ -49,6 +35,6 @@ export class TableDeleteComponent implements OnInit, OnDestroy {
   }
 
   deleteTable() {
-    this.store.dispatch(new DeleteTable(this.table._id));
+    this.store.dispatch(new DeleteTable(this.data.table._id));
   }
 }

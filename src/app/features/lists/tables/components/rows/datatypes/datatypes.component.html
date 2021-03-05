@@ -1,0 +1,26 @@
+<app-table-text-type *ngIf="isType(column.datatype, 'text')" [column]="column" (event)="changed($event)" [data]="data">
+</app-table-text-type>
+
+<app-table-longtext-type *ngIf="isType(column.datatype, 'longtext')" [column]="column" (event)="changed($event)"
+    [data]="data"></app-table-longtext-type>
+
+<app-table-number-type *ngIf="isType(column.datatype, 'number')" [column]="column" (event)="changed($event)"
+    [data]="data"></app-table-number-type>
+
+<app-table-boolean-type *ngIf="isType(column.datatype, 'boolean')" [column]="column" (event)="changed($event)"
+    [data]="data"></app-table-boolean-type>
+
+<app-table-date-type *ngIf="isType(column.datatype, 'date')" [column]="column" (event)="changed($event)" [data]="data">
+</app-table-date-type>
+
+<app-table-time-type *ngIf="isType(column.datatype, 'time')" [column]="column" (event)="changed($event)" [data]="data">
+</app-table-time-type>
+
+<app-table-datetime-type *ngIf="isType(column.datatype, 'datetime')" [column]="column" (event)="changed($event)"
+    [data]="data"></app-table-datetime-type>
+
+<app-table-money-type *ngIf="isType(column.datatype, 'money')" [column]="column" (event)="changed($event)"
+    [data]="data"></app-table-money-type>
+
+<app-table-url-type *ngIf="isType(column.datatype, 'url')" [column]="column" (event)="changed($event)" [data]="data">
+</app-table-url-type>

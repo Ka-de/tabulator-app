@@ -61,8 +61,10 @@
             }
 
             &-count {
-                display: flex;
+                display: grid;
                 align-items: center;
+                grid-template-columns: max-content max-content;
+                gap: .5vw;
 
                 &-number {
                     color: var(--extra-color);
@@ -95,101 +97,72 @@
 
         &-pane {
             display: grid;
-            grid-template-rows: max-content 1fr;
+            grid-template-rows: 1fr max-content;
             gap: 1vh;
             height: 100%;
             overflow: hidden;
 
-            &-tab {
+            &-wrapper {
                 display: flex;
-                align-items: center;
-                justify-content: space-around;
+                flex-direction: column;
+                align-content: flex-start;
 
-                &-button {
-                    width: 100%;
-                    border: none;
-                    outline: none;
-                    background-color: var(--major-color);
-                    color: var(--minor-color);
-                    padding: 0.5vh 0.5vw;
-                    margin: 1vh 1vw;
+                &-item{
+                    display: grid;
+                    grid-template-columns: max-content 1fr max-content max-content;
+                    gap: .5vw;
+                    align-items: center;
+                    margin: .5vh 0vw;
+                    padding: .5vh 1vw;
+                    filter: brightness(50%);
                     cursor: pointer;
+
+                    &-control{
+                        display: grid;
+                        align-items: center;
+                        gap: .3vw;
+                        grid-template-columns: repeat(2, max-content);
+                    }
+
+                    &-icon{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                    }
+
+                    &-icon:hover{
+                        color: var(--extra-color);
+                    }
+                    
                 }
 
-                &-button:hover {
-                    color: var(--extra-color);
+                &-item:hover{
+                    filter: brightness(100%);
+                    border-left: 4px solid var(--extra-color);
                 }
             }
 
-            &-window {
-                height: 100%;
-                overflow: hidden;
+            &-new {
                 display: grid;
-                grid-template-rows: 1fr max-content;
-                gap: 1vh;
+                grid-template-columns: repeat(2, max-content);
+                gap: 1vw;
+                align-items: center;
+                justify-content: center;
+                justify-self: center;
+                font-size: small;
+                padding: max(1vh, 10px);
+                margin-bottom: 1vh;
+                border-radius: 50%;
+                filter: brightness(70%);
+                cursor: pointer;
+                width: 80%;
+            }
 
-                &-wrapper {
-                    display: flex;
-                    flex-direction: column;
-                    align-content: flex-start;
-
-                    &-item{
-                        display: grid;
-                        grid-template-columns: max-content 1fr max-content max-content;
-                        gap: .5vw;
-                        align-items: center;
-                        margin: .5vh 0vw;
-                        padding: .5vh 1vw;
-                        filter: brightness(50%);
-                        cursor: pointer;
-
-                        &-control{
-                            display: grid;
-                            align-items: center;
-                            gap: .3vw;
-                            grid-template-columns: repeat(2, max-content);
-                        }
-
-                        &-icon{
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            cursor: pointer;
-                        }
-
-                        &-icon:hover{
-                            color: var(--extra-color);
-                        }
-                        
-                    }
-
-                    &-item:hover{
-                        filter: brightness(100%);
-                        border-left: 4px solid var(--extra-color);
-                    }
-                }
-
-                &-new {
-                    display: grid;
-                    grid-template-columns: repeat(2, max-content);
-                    gap: 1vw;
-                    align-items: center;
-                    justify-content: center;
-                    justify-self: center;
-                    font-size: small;
-                    padding: max(1vh, 10px);
-                    margin-bottom: 1vh;
-                    border-radius: 50%;
-                    filter: brightness(70%);
-                    cursor: pointer;
-                    width: 80%;
-                }
-
-                &-new:hover {
-                    border-radius: 10px;
-                    border: 1px solid var(--major-color);
-                    background-color: var(--extra-color);
-                }
+            &-new:hover {
+                border-radius: 10px;
+                border: 1px solid var(--major-color);
+                background-color: var(--extra-color);
             }
         }
     }
@@ -203,7 +176,7 @@
     &-container {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: max-content 1fr;
+        grid-template-rows: max-content max-content 1fr;
         align-content: flex-start;
         height: 100%;
         overflow: hidden;

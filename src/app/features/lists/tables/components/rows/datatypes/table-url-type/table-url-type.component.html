@@ -1,0 +1,4 @@
+<span class="url">
+    <label class="url-label">{{column.name}} {{ column.required ? '*': ''}}</label>
+    <input #input class="url-value" type="text" (change)="changed(input)" [value]="data ? data: ''">
+</span>

@@ -1,0 +1,44 @@
+.boolean {
+    display: grid;
+    grid-template-rows: max-content max-content;
+    align-content: flex-start;
+    gap: 0.2vh;
+
+    &-label{
+        font-weight: bold;
+    }
+
+    &-value{
+        border: 1px solid var(--minor-color);
+        border-radius: 50px;
+        width: fit-content;
+        display: flex;
+        color: var(--minor-color);
+        align-items: center;
+        justify-content: space-evenly;
+        overflow: hidden;
+
+        &-set{
+            cursor: pointer;
+            padding: 10px;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            border-radius: 50%;
+            transition: .5s;
+        }
+
+        &-set.active{
+            background-color: var(--extra-color);
+        }
+
+        &-set.active:hover{
+            background-color: var(--extra-color);
+            color: var(--minor-color);
+        }
+
+        &-set:hover{
+            color: var(--extra-color);
+        }
+    }
+}

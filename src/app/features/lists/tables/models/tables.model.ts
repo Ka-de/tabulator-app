@@ -12,20 +12,21 @@ export interface TableDTO extends TableEditable {
 
 export enum TableDataTypes {
     TEXT = "text",
-    LONG_TEXT = "long text",
+    LONGTEXT = "longtext",
     NUMBER = "number",
-    SELECT = "select",
-    MONEY = "money",
+    BOOLEAN = "boolean",
     DATE = "date",
     TIME = "time",
-    DATE_TIME = "date time",
-    LOOKUP = "look up",
-    BOOLEAN = "boolean",
-    IMAGE = "image",
+    DATETIME = "datetime",
+    MONEY = "money",
     URL = "url",
+    CHOICE = "choice",
+
+    LOOKUP = "lookup",    
     FORMULAR = "formular",
-    STATUS = "status",
-    COLLECTION = "collection"
+    COLLECTION = "collection",
+
+    IMAGE = "image",
 }
 
 export interface Table extends TableEditable {

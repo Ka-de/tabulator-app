@@ -7,4 +7,5 @@ export interface TableColumn {
     required?: boolean;
     unique?: boolean;
     description?: string;
+    attributes?: any;
 }

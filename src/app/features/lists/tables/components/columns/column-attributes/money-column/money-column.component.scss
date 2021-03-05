@@ -1,0 +1,15 @@
+.money {
+    display: grid;
+    gap: 0.1vh;
+    align-content: flex-start;
+    grid-template-columns: 1fr;
+
+    &-label {
+    }
+
+    &-currency {
+        height: 40px;
+        padding: 0px 1vw;
+        width: 100%;
+    }
+}

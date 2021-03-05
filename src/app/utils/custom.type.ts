@@ -5,3 +5,7 @@ export interface CustomType {
 export interface Entity<T> {
     [name: string]: T;
 }
+
+export type Writeable<T> = {
+    -readonly [P in keyof T]-?: T[P]
+}

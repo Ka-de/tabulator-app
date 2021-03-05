@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, ContentChild, ElementRef, Input, OnDestroy, OnInit, TemplateRef, Type, ViewChild, ViewContainerRef, ViewEncapsulation, ViewRef } from '@angular/core';
 import { PopupService } from './popup.service';
 
 @Component({
@@ -9,15 +9,28 @@ import { PopupService } from './popup.service';
 })
 export class PopupComponent implements OnInit, OnDestroy {
 
-  @Input()
-  id!: string;
+  @Input() id!: string;
+  @Input() component!: Type<unknown>
+  @Input() heading: string = '';
+  @Input() data!: any;
+  componentHolder!: ComponentRef<any>;
+  element!: HTMLElement;
 
-  @Input('heading')
-  heading: string = '';
+  removeWindow = (event: Event) => {
+    let clicked = event.target as HTMLElement;
 
-  private element!: HTMLElement;
+    if (this.element == clicked) {
+      this.popupService.close(this.id);
+    }
+  }
 
-  constructor(private popupService: PopupService, private el: ElementRef) {
+  @ViewChild('body', { read: ViewContainerRef }) bodyRef!: ViewContainerRef;
+
+  constructor(
+    private popupService: PopupService,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private el: ElementRef
+  ) {
     this.element = el.nativeElement;
   }
 
@@ -27,14 +40,10 @@ export class PopupComponent implements OnInit, OnDestroy {
       return;
     }
 
-    document.body.appendChild(this.element);
+    if (this.id == 'delete-table-single') {
+      console.log(this.data);
 
-    this.element.addEventListener('click', event => {
-      let clicked = event.target as HTMLElement;
-      if (this.element == clicked) {
-        this.close()
-      }
-    });
+    }
 
     this.popupService.add(this);
   }
@@ -44,13 +53,28 @@ export class PopupComponent implements OnInit, OnDestroy {
     this.element.remove();
   }
 
-  open() {
+  open(data: any = {}) {
     this.element.style.display = 'block';
     document.body.classList.add('popup-open');
+
+    this.data = { ...this.data, ...data };
+    
+    if (this.component) {
+      const c = this.componentFactoryResolver.resolveComponentFactory(this.component);
+      this.componentHolder = this.bodyRef.createComponent(c);
+      this.componentHolder.instance.data = this.data;
+    }
+
+    this.element.addEventListener('click', this.removeWindow, false);
   }
 
   close() {
     this.element.style.display = 'none';
     document.body.classList.remove('popup-open');
+    if (this.componentHolder) {
+      this.componentHolder.destroy();
+    }
+
+    this.element.removeEventListener('click', this.removeWindow, false);
   }
 }

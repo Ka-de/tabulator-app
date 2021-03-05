@@ -4,6 +4,9 @@ import { PopupService } from '@app/features/popup';
 import { AppState } from '@app/store';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { TableCreateComponent } from './components/table-create/table-create.component';
+import { TableDeleteComponent } from './components/table-delete/table-delete.component';
+import { TableEditComponent } from './components/table-edit/table-edit.component';
 import { Table, TableEvents } from './models/tables.model';
 import { GetTables } from './tables-store/tables.action';
 import { selectAllTables } from './tables-store/tables.selector';
@@ -14,7 +17,6 @@ import { selectAllTables } from './tables-store/tables.selector';
   styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit {
-  @Output() tableEvent = new EventEmitter<{ action: string, table: Table }>();
   tables!: Table[];
   subscriptions = new Subscription();
   selectedTable!: Table;
@@ -49,5 +51,16 @@ export class TablesComponent implements OnInit {
     return this.selectedTable
       ? table._id == this.selectedTable._id
       : false;
+  }
+
+  getData(action: string) {    
+    if (action == 'delete') {
+      return { table: this.selectedTable }
+    }
+    else if (action == 'edit') {
+      return { table: this.selectedTable };
+    }
+
+    return;
   }
 }

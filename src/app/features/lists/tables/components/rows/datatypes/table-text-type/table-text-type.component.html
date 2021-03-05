@@ -1,0 +1,4 @@
+<span class="text">
+    <label class="text-label">{{column.name}} {{ column.required ? '*': ''}}</label>
+    <input #input class="text-value" type="text" (keyup)="changed(input)" [value]="data ? data: ''" maxlength="255">
+</span>

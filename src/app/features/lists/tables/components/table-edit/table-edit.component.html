@@ -1,14 +1,14 @@
-<div *ngIf="table" class="edit-table">
+<div *ngIf="data.table" class="edit-table">
     <form (submit)="updateTable(tableForm.value)" class="edit-table-form" #tableForm="ngForm">
         <div class="edit-table-form-group">
             <span class="edit-table-form-group-input">
                 <label class="edit-table-form-group-input-label">Title *</label>
-                <input type="text" class="edit-table-form-group-input-data" required [ngModel]="table.title" name="title">
+                <input type="text" class="edit-table-form-group-input-data" required [ngModel]="data.table.title" name="title">
             </span>
 
             <span class="edit-table-form-group-input">
                 <label class="edit-table-form-group-input-label">Description</label>
-                <textarea rows="4" class="edit-table-form-group-input-data" [ngModel]="table.description" name="description"></textarea>
+                <textarea rows="4" class="edit-table-form-group-input-data" [ngModel]="data.table.description" name="description"></textarea>
             </span>
 
             <span class="edit-table-form-group-submit">

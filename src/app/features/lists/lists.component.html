@@ -6,15 +6,15 @@
 
     <div class="lists-window">
         <section class="lists-sidebar reduced" #Sidebar (click)="openSidebar(Sidebar, ToggleSidebar)">
-            <span class="lists-sidebar-header">
+            <span class="lists-sidebar-header" routerLink='tables'>
                 <i class="fa fa-home lists-sidebar-header-icon"></i>
                 <p class="lists-sidebar-header-text hide">My Lists</p>
             </span>
             <span class="lists-sidebar-menu">
-                <i class="fa fa-undo lists-sidebar-menu-sync"></i>
+                <i class="fa fa-undo lists-sidebar-menu-sync" (click)="reload()"></i>
                 <span class="hide">
                     <span class="lists-sidebar-menu-count">
-                        <span class="lists-sidebar-menu-count-number">9</span>
+                        <span class="lists-sidebar-menu-count-number">{{tables.length}}</span>
                         <span class="lists-sidebar-menu-count-name">Lists</span>
                     </span>
                 </span>
@@ -24,55 +24,25 @@
                 <input type="text" class="lists-sidebar-search-box hide" placeholder="filter">
             </span>
             <span class="lists-sidebar-pane hide">
-                <span class="lists-sidebar-pane-tab">
-                    <button class="lists-sidebar-pane-tab-button" (click)="router.navigate(['/lists/tables'])">Tables</button>
-                    <button class="lists-sidebar-pane-tab-button" (click)="router.navigate(['/lists/databases'])">Databases</button>
-                </span>
-                <span *ngIf="showPane('databases')" class="lists-sidebar-pane-window">
-                    <span class="lists-sidebar-pane-window-wrapper">
-                        <span #Table *ngFor="let table of [1, 2, 3, 4, 5]"
-                            class="lists-sidebar-pane-window-wrapper-item"
-                            (mouseleave)="CollectionControl.style.display='none'"
-                            (mouseenter)="CollectionControl.style.display='flex'">
-                            <i class="fa fa-angle-right lists-sidebar-pane-window-wrapper-item-icon"></i>
-                            Collection {{table}}
-                            <span #CollectionControl style="display: none;"
-                                class="lists-sidebar-pane-window-wrapper-item-control">
-                                <i class="fa fa-plus lists-sidebar-pane-window-wrapper-item-icon"></i>
-                                <i class="fa fa-trash lists-sidebar-pane-window-wrapper-item-icon"
-                                    (click)="Table.remove()"></i>
-                            </span>
+                <span class="lists-sidebar-pane-wrapper">
+                    <span #Table *ngFor="let table of tables" class="lists-sidebar-pane-wrapper-item"
+                        (mouseenter)="selectedTable = table; displayTableOptions = true"
+                        (mouseleave)="displayTableOptions = false">
+                        <i class="fa fa-angle-right lists-sidebar-pane-wrapper-item-icon"></i>
+                        <span routerLink="/lists/tables/{{table._id}}">{{table.title}}</span>
+                        <span *ngIf="showTableOptions(table)" class="lists-sidebar-pane-wrapper-item-control">
+                            <i class="fa fa-pencil lists-sidebar-pane-wrapper-item-icon"
+                                (click)="popupService.open('edit-table', {'table': selectedTable})"></i>
+                            <i class="fa fa-trash lists-sidebar-pane-wrapper-item-icon"
+                                (click)="popupService.open('delete-table', {'table': selectedTable})"></i>
                         </span>
-                    </span>
-
-                    <span class="lists-sidebar-pane-window-new" (mouseleave)="CreateCollection.style.display='none'"
-                        (mouseenter)="CreateCollection.style.display='flex'">
-                        <i class="fa fa-plus"></i>
-                        <span style="display: none;" #CreateCollection>Create Collection</span>
                     </span>
                 </span>
 
-                <span class="lists-sidebar-pane-window" *ngIf="showPane('tables')">
-                    <span class="lists-sidebar-pane-window-wrapper">
-                        <span #Table *ngFor="let table of tables"
-                            class="lists-sidebar-pane-window-wrapper-item"
-                            (mouseenter)="selectedTable = table; displayTableOptions = true"
-                            (mouseleave)="displayTableOptions = false">
-                            <i class="fa fa-angle-right lists-sidebar-pane-window-wrapper-item-icon"></i>
-                            {{table.title}}
-                            <span *ngIf="showTableOptions(table)"
-                                class="lists-sidebar-pane-window-wrapper-item-control">
-                                <i class="fa fa-trash lists-sidebar-pane-window-wrapper-item-icon"
-                                    (click)="popupService.open('delete-table')"></i>
-                            </span>
-                        </span>
-                    </span>
-
-                    <span class="lists-sidebar-pane-window-new" (mouseleave)="CreateTable.style.display='none'"
-                        (mouseenter)="CreateTable.style.display='flex'">
-                        <i class="fa fa-plus"></i>
-                        <span style="display: none;" #CreateTable>Create Table</span>
-                    </span>
+                <span class="lists-sidebar-pane-new" (mouseleave)="CreateTable.style.display='none'"
+                    (mouseenter)="CreateTable.style.display='flex'" (click)="popupService.open('create-table')">
+                    <i class="fa fa-plus"></i>
+                    <span style="display: none;" #CreateTable>Create Table</span>
                 </span>
             </span>
         </section>
@@ -82,14 +52,17 @@
                     (click)="toggleSidebar(Sidebar, ToggleSidebar)"></i>
                 <span class="lists-container-header-name">CraterList 0.0.0</span>
             </div>
-            <app-tables *ngIf="showWindow(listWindows.TABLES)" class="lists-container-wrapper">
-            </app-tables>
 
-            <app-table-single *ngIf="showWindow(listWindows.TABLE)" [_id]="_id"></app-table-single>
+            <router-outlet></router-outlet>
         </section>
     </div>
 </div>
 
-<app-popup *ngIf="selectedTable" id="delete-table" heading="Delete Table">
-    <app-table-delete [table]="selectedTable"></app-table-delete>
+<app-popup id="edit-table" heading="Edit Table" [component]="tableEdit">
+</app-popup>
+
+<app-popup id="delete-table" heading="Delete Table" [component]="tableDelete">
+</app-popup>
+
+<app-popup id="create-table" heading="Create Table" [component]="tableCreate">
 </app-popup>

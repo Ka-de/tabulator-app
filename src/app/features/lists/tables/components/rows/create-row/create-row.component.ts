@@ -5,6 +5,7 @@ import { AppState } from '@app/store';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { TableRowDTO } from '../../../dtos/tables-row.dto';
+import { TableColumn } from '../../../models/tables-column.model';
 import { Table } from '../../../models/tables.model';
 import { CreateTableRow, TablesActionsType } from '../../../tables-store/tables.action';
 
@@ -14,34 +15,35 @@ import { CreateTableRow, TablesActionsType } from '../../../tables-store/tables.
   styleUrls: ['./create-row.component.scss']
 })
 export class CreateRowComponent implements OnInit {
-  @Input('table') table!: Table;
+  @Input() data!: { table: Table };
   subscriptions = new Subscription();
+  content: any = {};
+
+  get isFormInvalid() {
+    for (let column of this.data.table.columns) {
+      if (column.required) {
+        if (!this.content[column.name]) return true;
+      }
+    }
+    return false;
+  }
 
   constructor(
     private store: Store<AppState>,
-    private toastService: ToastService,
     private popupService: PopupService
   ) { }
 
-  ngOnInit(): void {
-    this.subscriptions.add(
-      this.store.select(state => state.tables).subscribe(
-        tables => {
-          if (tables.loaded && tables.action == TablesActionsType.CREATE_TABLE_ROW) {
-            this.toastService.showMessage({
-              title: 'Create row',
-              details: 'Row creation was successful',
-              type: 'success'
-            });
+  ngOnInit(): void { }
 
-            this.popupService.close('add-row');
-          }
-        }
-      )
-    );
+  createRow() {
+    this.store.dispatch(new CreateTableRow({ _id: this.data.table._id, data: this.content }));
   }
 
-  createRow(data: TableRowDTO) {
-    this.store.dispatch(new CreateTableRow({ _id: this.table._id, data }));
+  setData(value: any, column: TableColumn) {
+    this.content = { ...this.content, [column.name]: value };
+  }
+
+  close() {
+    this.popupService.close('add-row');
   }
 }

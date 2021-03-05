@@ -5,4 +5,5 @@ export interface TableColumnDTO {
     datatype: TableDataTypes;
     required?: boolean;
     unique?: boolean;
+    attributes?: any;
 }

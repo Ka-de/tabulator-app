@@ -1,0 +1,16 @@
+<span class="money">
+    <label class="money-label">{{column.name}} {{ column.required ? '*': ''}}</label>
+    <span *ngIf="!column.attributes?.currency" class="money-value">
+        <select #currency (change)="changed(amount,currency)" class="money-value-currency">
+            <option *ngFor="let currency of currencies" [selected]="selected(currency)">{{currency}}</option>
+        </select>
+        <input #amount class="money-value-amount" type="number" (change)="changed(amount,currency)" min="0"
+            [value]="data? data.amount: ''">
+    </span>
+
+    <span *ngIf="column.attributes?.currency" class="money-value">
+        <span class="money-value-currency">{{column.attributes.currency}}</span>
+        <input #amount class="money-value-amount" type="number" (change)="changed(amount)" min="0"
+            [value]="data? data.amount: ''">
+    </span>
+</span>

@@ -1,0 +1,4 @@
+<span class="number">
+    <label class="number-label">{{column.name}} {{ column.required ? '*': ''}}</label>
+    <input #input class="number-value" type="number" (keyup)="changed(input)" [value]="data ? data: ''">
+</span>

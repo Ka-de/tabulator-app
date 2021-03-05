@@ -1,0 +1,36 @@
+.money {
+    display: grid;
+    grid-template-rows: max-content max-content;
+    align-content: flex-start;
+    gap: 0.2vh;
+
+    &-label{
+        font-weight: bold;
+    }
+
+    &-value {
+        height: 40px;
+        border: 1px solid var(--minor-color);
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        gap: 1vw;
+        align-items: center;
+
+        &-currency{
+            border: none;
+            outline: none;
+            height: 100%;
+            border-right: 1px solid var(--minor-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0vh 1vw;
+        }
+
+        &-amount{
+            border: none;
+            outline: none;
+            height: 100%;
+        }
+    }
+}

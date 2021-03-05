@@ -2,9 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PopupService } from '@app/features/popup';
 import { ToastService } from '@app/features/toast/toast.service';
 import { AppState } from '@app/store';
+import { Writeable } from '@app/utils/custom.type';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { TableRowDTO } from '../../../dtos/tables-row.dto';
+import { TableColumn } from '../../../models/tables-column.model';
 import { TableRow } from '../../../models/tables-rows.model';
 import { Table } from '../../../models/tables.model';
 import { TablesActionsType, UpdateTableRow } from '../../../tables-store/tables.action';
@@ -15,35 +17,32 @@ import { TablesActionsType, UpdateTableRow } from '../../../tables-store/tables.
   styleUrls: ['./edit-row.component.scss']
 })
 export class EditRowComponent implements OnInit {
-  @Input('row') row!: TableRow | any;
-  @Input('table') table!: Table;
+  @Input() data!: { table: Table, row: TableRow };
   subscriptions = new Subscription();
+  content: any = {};
 
   constructor(
     private store: Store<AppState>,
-    private toastService: ToastService,
     private popupService: PopupService
   ) { }
 
   ngOnInit(): void {
-    this.subscriptions.add(
-      this.store.select(state => state.tables).subscribe(
-        tables => {
-          if (tables.loaded && tables.action == TablesActionsType.UPDATE_TABLE_ROW) {
-            this.toastService.showMessage({
-              title: 'Update row',
-              details: 'Row update was successful',
-              type: 'success'
-            });
-
-            this.popupService.close('edit-row');
-          }
-        }
-      )
-    );
+    this.content = this.data.row;
   }
 
-  updateRow(data: TableRowDTO) {
-    this.store.dispatch(new UpdateTableRow({ _id: this.table._id, row_id: this.row.r_id, data }));
+  updateRow() {
+    this.store.dispatch(new UpdateTableRow({ _id: this.data.table._id, row_id: this.data.row.r_id, data: this.content }));
+  }
+
+  isType(type: string, check: string) {
+    return type === check;
+  }
+
+  setData(value: any, column: TableColumn) {
+    this.content = { ...this.content, [column.name]: value };
+  }
+
+  close() {
+    this.popupService.close('edit-row');
   }
 }

@@ -15,36 +15,16 @@ import { DeleteTableColumn, TablesActionsType } from '../../../tables-store/tabl
   styleUrls: ['./delete-column.component.scss']
 })
 export class DeleteColumnComponent implements OnInit {
-  @Input('column') column!: TableColumn;
-  @Input('table') table!: Table;
-
+  @Input() data!: { column: TableColumn, table: Table };
   subscriptions = new Subscription();
 
   constructor(
-    private store: Store<AppState>,
-    private toastService: ToastService,
-    private popupService: PopupService
+    private store: Store<AppState>
   ) { }
 
-  ngOnInit(): void {
-    this.subscriptions.add(
-      this.store.select(state => state.tables).subscribe(
-        tables => {
-          if (tables.action == TablesActionsType.DELETE_TABLE_COLUMN && tables.loaded) {
-            this.toastService.showMessage({
-              type: 'success',
-              title: 'Table Deletion',
-              details: 'Table was deleted successfully.'
-            });
-
-            this.popupService.close('delete-column');
-          }
-        }
-      )
-    );
-  }
+  ngOnInit(): void { }
 
   deleteColumn() {
-    this.store.dispatch(new DeleteTableColumn({ _id: this.table._id, column_id: this.column._id }));
+    this.store.dispatch(new DeleteTableColumn({ _id: this.data.table._id, column_id: this.data.column._id }));
   }
 }

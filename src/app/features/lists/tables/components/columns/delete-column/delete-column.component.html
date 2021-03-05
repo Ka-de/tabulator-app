@@ -1,6 +1,6 @@
-<div *ngIf="table && column" class="delete-column">
+<div *ngIf="data.table && data.column" class="delete-column">
     <span class="delete-column-note">
-        This column with title ({{column.name}}) in table ({{table.title}}) will be deleted
+        This column with title ({{data.column.name}}) in table ({{data.table.title}}) will be deleted
     </span>
     <span class="delete-column-continue">
         Click delete to continue

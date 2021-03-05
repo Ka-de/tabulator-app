@@ -1,0 +1,7 @@
+<span class="boolean">
+    <label class="boolean-label">{{column.name}} {{ column.required ? '*': ''}}</label>
+    <span class="boolean-value">
+        <button type="button" class="boolean-value-set" [class.active]="value" (click)="value = true">On</button>
+        <button type="button" class="boolean-value-set" [class.active]="!value" (click)="value = false">Off</button>
+    </span>
+</span>

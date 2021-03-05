@@ -6,4 +6,5 @@ export interface TableColumnDTO {
     description?: string;
     required?: boolean;
     unique?: boolean;
+    attributes?: any;
 }

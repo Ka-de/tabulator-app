@@ -1,13 +1,12 @@
-<form (submit)="updateRow(rowForm.value)" class="row-form" #rowForm="ngForm" *ngIf="table">
+<form (submit)="updateRow()" class="row-form" #rowForm="ngForm" *ngIf="data.table && data.row">
     <div class="row-form-inputs">
-        <span class="row-form-inputs-group" *ngFor="let column of table.columns">
-            <label class="row-forms-inputs-group-label">{{column.name}} {{ column.required ? '*': ''}}</label>
-            <input class="row-form-inputs-group-text" [name]="column.name" required="{{column.required ? true: false}}"
-                [ngModel]="row[column.name]">
+        <span class="row-form-inputs-group" *ngFor="let column of data.table.columns">
+            <app-datatypes [column]="column" (update)="setData($event, column)" [data]="content[column.name]">
+            </app-datatypes>
         </span>
     </div>
     <div class="row-form-controls">
         <button class="row-form-controls-button" [disabled]="rowForm.invalid">Update</button>
-        <button type="button" class="row-form-controls-button">Cancel</button>
+        <button type="button" class="row-form-controls-button" (click)="close()">Cancel</button>
     </div>
 </form>

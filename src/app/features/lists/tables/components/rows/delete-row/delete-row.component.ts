@@ -14,9 +14,7 @@ import { DeleteTableRow, TablesActionsType } from '../../../tables-store/tables.
   styleUrls: ['./delete-row.component.scss']
 })
 export class DeleteRowComponent implements OnInit {
-  @Input('row') row!: TableRow;
-  @Input('table') table!: Table;
-
+  @Input('row') data!: { row: TableRow, table: Table };
   subscriptions = new Subscription();
 
   constructor(
@@ -25,25 +23,9 @@ export class DeleteRowComponent implements OnInit {
     private popupService: PopupService
   ) { }
 
-  ngOnInit(): void {
-    this.subscriptions.add(
-      this.store.select(state => state.tables).subscribe(
-        tables => {
-          if (tables.action == TablesActionsType.DELETE_TABLE_ROW && tables.loaded) {
-            this.toastService.showMessage({
-              type: 'success',
-              title: 'Row Deletion',
-              details: 'Table row was deleted successfully.'
-            });
-
-            this.popupService.close('delete-row');
-          }
-        }
-      )
-    );
-  }
+  ngOnInit(): void { }
 
   deleteRow() {
-    this.store.dispatch(new DeleteTableRow({ _id: this.table._id, row_id: this.row.r_id }));
+    this.store.dispatch(new DeleteTableRow({ _id: this.data.table._id, row_id: this.data.row.r_id }));
   }
 }

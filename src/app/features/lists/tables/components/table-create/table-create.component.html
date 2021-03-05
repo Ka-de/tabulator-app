@@ -1,5 +1,5 @@
 <div class="create-table">
-    <form (submit)="createTable()" [formGroup]="tableForm" class="create-table-form">
+    <form *ngIf="tableForm" (submit)="createTable()" [formGroup]="tableForm" class="create-table-form">
         <div class="create-table-form-group">
             <span class="create-table-form-group-input">
                 <label class="create-table-form-group-input-label">Title *</label>

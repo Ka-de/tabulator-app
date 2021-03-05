@@ -1,0 +1,22 @@
+.longtext {
+    display: grid;
+    gap: 0.5vh;
+    align-content: flex-start;
+    grid-template-columns: 1fr;
+
+    &-group {
+        display: grid;
+        gap: 0.1vh;
+        align-content: flex-start;
+        grid-template-columns: 1fr;
+        grid-template-rows: max-content max-content;
+
+        &-label {
+        }
+
+        &-data {
+            height: 40px;
+            padding: 0px 1vw;
+        }
+    }
+}

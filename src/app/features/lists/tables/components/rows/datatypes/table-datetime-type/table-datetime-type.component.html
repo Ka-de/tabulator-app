@@ -1,0 +1,4 @@
+<span class="datetime">
+    <label class="datetime-label">{{column.name}} {{ column.required ? '*': ''}}</label>
+    <input #input class="datetime-value" type="datetime-local" (keyup)="changed(input)" (change)="changed(input)" [value]="data ? data: ''">
+</span>

@@ -14,6 +14,7 @@ import { SharedModule } from './utils/shared.module';
 import { NotFoundComponent } from './features/not-found/not-found.component';
 import { PopupService } from './features/popup';
 import { HomeComponent } from './features/home/home.component';
+import { SampleComponent } from './sample/sample.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { HomeComponent } from './features/home/home.component';
     ToastComponent,
     NotFoundComponent,
     HomeComponent,
+    SampleComponent,
   ],
   imports: [
     BrowserModule,

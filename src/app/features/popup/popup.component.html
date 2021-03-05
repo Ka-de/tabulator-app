@@ -3,7 +3,6 @@
         <h5 class="popup-header-title">{{heading}}</h5>
         <i class="fa fa-times popup-header-close" (click)="close()"></i>
     </span>
-    <div class="popup-body">
-        <ng-content></ng-content>
-    </div>
+    <ng-container class="popup-body" #body>
+    </ng-container>
 </div>

@@ -1,0 +1,4 @@
+<span class="time">
+    <label class="time-label">{{column.name}} {{ column.required ? '*': ''}}</label>
+    <input #input class="time-value" type="time" (keyup)="changed(input)" (change)="changed(input)" [value]="data ? data : ''">
+</span>

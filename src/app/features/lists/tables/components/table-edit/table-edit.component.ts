@@ -14,9 +14,7 @@ import { PopupService } from '@app/features/popup';
   styleUrls: ['./table-edit.component.scss']
 })
 export class TableEditComponent implements OnInit {
-  @Input('table') table!: Table;
-  @Input('popup') popup!: string;
-
+  data!: { table: Table };
   subscriptions = new Subscription();
 
   constructor(
@@ -25,25 +23,10 @@ export class TableEditComponent implements OnInit {
     private popupService: PopupService
   ) { }
 
-  ngOnInit(): void {
-    this.subscriptions.add(
-      this.store.select(state => state.tables).subscribe(
-        tables => {
-          if (tables.loaded && tables.action == TablesActionsType.UPDATE_TABLE) {
-            this.toastService.showMessage({
-              title: 'Table Update',
-              details: 'Table update was successful, navigating to table',
-              type: 'success'
-            });
-
-            this.popupService.close('edit-table');
-          }
-        }
-      )
-    )
+  ngOnInit(): void {  
   }
 
   updateTable(data: TableEditable) {
-    this.store.dispatch(new UpdateTable({ _id: this.table._id, data }));
+    this.store.dispatch(new UpdateTable({ _id: this.data.table._id, data }));
   }
 }

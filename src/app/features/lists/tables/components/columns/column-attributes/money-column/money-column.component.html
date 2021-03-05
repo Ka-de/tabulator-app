@@ -1,0 +1,7 @@
+<span class="money">
+    <label for="" class="money-label">Default Currency</label>
+    <select #currency (change)="changed(currency)" class="money-currency">
+        <option selected value="">None</option>
+        <option *ngFor="let currency of currencies" [selected]="selected(currency)">{{currency}}</option>
+    </select>
+</span>

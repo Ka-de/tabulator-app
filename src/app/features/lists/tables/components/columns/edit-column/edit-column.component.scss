@@ -14,12 +14,12 @@
 
         &-group{
             display: grid;
-            grid-template-rows: max-content max-content;
+            grid-template-rows: max-content max-content max-content;
             align-content: flex-start;
             gap: .2vh;
 
             &-label{
-
+                font-weight: bold;
             }   
             
             &-text, &-select{

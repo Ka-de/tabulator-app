@@ -1,0 +1,5 @@
+<span class="text">
+    <label class="text-label">{{column.name}} {{ column.required ? '*': ''}}</label>
+    <textarea #input class="text-value" type="text" (change)="changed(input)" (keypress)="checklines($event)"
+        [value]="data ? data: ''" [rows]="column.attributes?.maxLines || 4"></textarea>
+</span>

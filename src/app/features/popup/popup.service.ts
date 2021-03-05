@@ -16,13 +16,15 @@ export class PopupService {
     this.modals = this.modals.filter(x => x.id !== id);
   }
 
-  open(id: string) {
+  open(id: string, data?: any) {
     const modal = this.modals.find(x => x.id === id);
-    modal.open();
+    modal.open(data);
   }
 
   close(id: string) {
     const modal = this.modals.find(x => x.id === id);
+    console.log(id);
+    
     modal.close();
   }
 

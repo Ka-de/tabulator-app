@@ -1,4 +1,7 @@
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { PopupService } from "@app/features/popup";
+import { ToastService } from "@app/features/toast/toast.service";
 import { AppState } from "@app/store";
 import { AddError, RemoveError } from "@app/store/error/error.action";
 import { Actions, Effect, ofType } from "@ngrx/effects";
@@ -13,7 +16,10 @@ export class TablesEffects {
     constructor(
         private action$: Actions,
         private tablesService: TablesService,
-        private store: Store<AppState>
+        private store: Store<AppState>,
+        private popupService: PopupService,
+        private toastService: ToastService,
+        private router: Router
     ) { }
 
     @Effect()
@@ -41,7 +47,16 @@ export class TablesEffects {
         ofType<CreateTable>(TablesActionsType.CREATE_TABLE),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: CreateTable) => this.tablesService.createTable(action.payload).pipe(
-            map(table => new CreateTableSuccess(table)),
+            map(table => {
+                this.toastService.showMessage({
+                    title: 'Table Creation',
+                    details: 'Table creation was successful, navigating to table',
+                    type: 'success'
+                });
+                this.popupService.close('create-table');
+
+                return new CreateTableSuccess(table);
+            }),
             catchError(err => of(new AddError(err.error)))
         ))
     );
@@ -51,7 +66,16 @@ export class TablesEffects {
         ofType<UpdateTable>(TablesActionsType.UPDATE_TABLE),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: UpdateTable) => this.tablesService.updateTable(action.payload._id, action.payload.data).pipe(
-            map(edited => new UpdateTableSuccess({ _id: action.payload._id, edited })),
+            map(edited => {
+                this.toastService.showMessage({
+                    title: 'Table Update',
+                    details: 'Table update was successful, navigating to table',
+                    type: 'success'
+                });
+
+                this.popupService.close('edit-table');
+                return new UpdateTableSuccess({ _id: action.payload._id, edited });
+            }),
             catchError(err => of(new AddError(err.error)))
         ))
     );
@@ -61,7 +85,17 @@ export class TablesEffects {
         ofType<DeleteTable>(TablesActionsType.DELETE_TABLE),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: DeleteTable) => this.tablesService.deleteTable(action.payload).pipe(
-            map(data => new DeleteTableSuccess(data._id)),
+            map(data => {
+                this.toastService.showMessage({
+                    type: 'success',
+                    title: 'Table Deletion',
+                    details: 'Table was deleted successfully.'
+                });
+
+                this.popupService.close('delete-table');
+                this.router.navigate(['/lists/tables']);
+                return new DeleteTableSuccess(data._id);
+            }),
             catchError(err => {
                 return of(new AddError(err.error))
             })
@@ -73,7 +107,17 @@ export class TablesEffects {
         ofType<CreateTableColumn>(TablesActionsType.CREATE_TABLE_COLUMN),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: CreateTableColumn) => this.tablesService.createTableColumn(action.payload._id, action.payload.data).pipe(
-            map(column => new CreateTableColumnSuccess({ _id: action.payload._id, column })),
+            map(column => {
+                this.toastService.showMessage({
+                    title: 'Create column',
+                    details: 'Column creation was successful',
+                    type: 'success'
+                });
+
+                this.popupService.close('add-column');
+
+                return new CreateTableColumnSuccess({ _id: action.payload._id, column });
+            }),
             catchError(err => of(new AddError(err.error)))
         ))
     );
@@ -83,7 +127,15 @@ export class TablesEffects {
         ofType<UpdateTableColumn>(TablesActionsType.UPDATE_TABLE_COLUMN),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: UpdateTableColumn) => this.tablesService.updateTableColumn(action.payload._id, action.payload.column_id, action.payload.data).pipe(
-            map(column => new UpdateTableColumnSuccess({ _id: action.payload._id, column })),
+            map(column => {
+                this.toastService.showMessage({
+                    title: 'Update column',
+                    details: 'Column update was successful',
+                    type: 'success'
+                });
+                this.popupService.close('edit-column');
+                return new UpdateTableColumnSuccess({ _id: action.payload._id, column });
+            }),
             catchError(err => of(new AddError(err.error)))
         ))
     );
@@ -93,7 +145,16 @@ export class TablesEffects {
         ofType<DeleteTableColumn>(TablesActionsType.DELETE_TABLE_COLUMN),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: DeleteTableColumn) => this.tablesService.deleteTableColumn(action.payload._id, action.payload.column_id).pipe(
-            map(data => new DeleteTableColumnSuccess({ _id: data._id, column_id: data.column_id })),
+            map(data => {
+                this.toastService.showMessage({
+                    type: 'success',
+                    title: 'Table Deletion',
+                    details: 'Table was deleted successfully.'
+                });
+
+                this.popupService.close('delete-column');
+                return new DeleteTableColumnSuccess({ _id: data._id, column_id: data.column_id });
+            }),
             catchError(err => of(new AddError(err.error)))
         ))
     );
@@ -103,7 +164,15 @@ export class TablesEffects {
         ofType<CreateTableRow>(TablesActionsType.CREATE_TABLE_ROW),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: CreateTableRow) => this.tablesService.createTableRow(action.payload._id, action.payload.data).pipe(
-            map(row => new CreateTableRowSuccess({ _id: action.payload._id, row })),
+            map(row => {
+                this.toastService.showMessage({
+                    title: 'Create row',
+                    details: 'Row creation was successful',
+                    type: 'success'
+                });
+                this.popupService.close('add-row');
+                return new CreateTableRowSuccess({ _id: action.payload._id, row });
+            }),
             catchError(err => of(new AddError(err.error)))
         ))
     );
@@ -113,7 +182,15 @@ export class TablesEffects {
         ofType<UpdateTableRow>(TablesActionsType.UPDATE_TABLE_ROW),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: UpdateTableRow) => this.tablesService.updateTableRow(action.payload._id, action.payload.row_id, action.payload.data).pipe(
-            map(row => new UpdateTableRowSuccess({ _id: action.payload._id, row })),
+            map(row => {
+                this.toastService.showMessage({
+                    title: 'Update row',
+                    details: 'Row update was successful',
+                    type: 'success'
+                });
+                this.popupService.close('edit-row');
+                return new UpdateTableRowSuccess({ _id: action.payload._id, row });
+            }),
             catchError(err => of(new AddError(err.error)))
         ))
     );
@@ -123,7 +200,16 @@ export class TablesEffects {
         ofType<DeleteTableRow>(TablesActionsType.DELETE_TABLE_ROW),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: DeleteTableRow) => this.tablesService.deleteTableRow(action.payload._id, action.payload.row_id).pipe(
-            map(data => new DeleteTableRowSuccess({ _id: action.payload._id, row_id: data.row_id })),
+            map(data => {
+                this.toastService.showMessage({
+                    type: 'success',
+                    title: 'Row Deletion',
+                    details: 'Table row was deleted successfully.'
+                });
+
+                this.popupService.close('delete-row');
+                return new DeleteTableRowSuccess({ _id: action.payload._id, row_id: data.row_id });
+            }),
             catchError(err => of(new AddError(err.error)))
         ))
     );
