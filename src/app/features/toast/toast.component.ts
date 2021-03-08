@@ -5,6 +5,7 @@ import { RemoveToast } from '@app/features/toast/store/toast.action';
 import { selectLastToasts } from '@app/features/toast/store/toast.selector';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { ToastService } from './toast.service';
 
 @Component({
   selector: 'app-toast',
@@ -14,7 +15,8 @@ import { Observable } from 'rxjs';
 export class ToastComponent implements OnInit {
   notifications!: Observable<Toast[]>
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private toastService: ToastService
   ) { }
 
   ngOnInit(): void {

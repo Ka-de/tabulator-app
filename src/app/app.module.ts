@@ -15,6 +15,7 @@ import { NotFoundComponent } from './features/not-found/not-found.component';
 import { PopupService } from './features/popup';
 import { HomeComponent } from './features/home/home.component';
 import { SampleComponent } from './sample/sample.component';
+import { ValidateRow } from './utils/row.validator';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SampleComponent } from './sample/sample.component';
     TableResolver,
     TablesService,
     ListsService,
-    PopupService
+    PopupService,
+    ValidateRow
   ],
   bootstrap: [AppComponent]
 })

@@ -23,8 +23,9 @@ export class TableUrlTypeComponent implements OnInit {
   changed(element: HTMLInputElement) {
     const value = element.value;
     try {
-      new URL(value);
-      this.event.emit(value);
+      if(new URL(value)){
+        this.event.emit(value);
+      }
     } catch (error) {
       this.toastService.showMessage({
         type: 'error',

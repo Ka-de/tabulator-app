@@ -12,7 +12,7 @@
             <label class="column-forms-inputs-group-label">Type</label>
             <select #ColumnType class="column-form-inputs-group-select" formControlName="datatype"
                 (change)="type=ColumnType.value">
-                <option *ngFor="let type of dataTypes">{{type}}</option>
+                <option *ngFor="let type of dataTypes" [selected]="type == data.column.datatype">{{type}}</option>
             </select>
 
             <app-column-attributes [type]="type" (update)="setAttributes($event)" [attributes]="data.column.attributes"></app-column-attributes>
@@ -27,7 +27,7 @@
         </span>
     </div>
     <div class="column-form-controls">
-        <button class="column-form-controls-button" [disabled]="columnForm.invalid">Create</button>
+        <button class="column-form-controls-button" [disabled]="columnForm.invalid">Update</button>
         <button type="button" class="column-form-controls-button" (click)="close()">Cancel</button>
     </div>
 </form>
