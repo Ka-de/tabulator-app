@@ -41,6 +41,7 @@ const routes: Routes = [
       { path: 'tables/all', component: TablesComponent },
       { path: 'tables/:id', component: TableSingleComponent, resolve: { data: TableResolver } },
       { path: 'tables', pathMatch: 'full', redirectTo: 'tables/all' },
+      { path: '', pathMatch: 'full', redirectTo: 'tables/all' }
     ]
   },
   { path: '**', component: NotFoundComponent }

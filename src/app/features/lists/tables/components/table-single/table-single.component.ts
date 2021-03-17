@@ -15,6 +15,7 @@ import { DeleteColumnComponent } from '../columns/delete-column/delete-column.co
 import { EditRowComponent } from '../rows/edit-row/edit-row.component';
 import { CreateRowComponent } from '../rows/create-row/create-row.component';
 import { DeleteRowComponent } from '../rows/delete-row/delete-row.component';
+import { dataSize } from '@app/utils/object.size';
 
 @Component({
   selector: 'app-table-single',
@@ -25,6 +26,7 @@ export class TableSingleComponent implements OnInit {
   subscriptions = new Subscription();
   table!: Table;
   rows!: any[];
+  dataSize = dataSize;
 
   selectedColumn!: TableColumn | undefined;
   selectedRow!: TableRow | undefined;
@@ -38,8 +40,8 @@ export class TableSingleComponent implements OnInit {
   editRow = EditRowComponent;
   deleteRow = DeleteRowComponent;
 
-  get tableData(){    
-    return {table: this.table}
+  get tableData() {
+    return { table: this.table }
   }
 
   constructor(

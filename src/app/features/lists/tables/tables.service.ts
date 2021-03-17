@@ -15,6 +15,7 @@ export class TablesService {
     private http: HttpClient
   ) { }
 
+  //process the requests
   private request<T>(method: string, endpoint: string, data?: any) {
     const url = `${this.api}/${endpoint}`;
     return this.http.request<T>(method.toUpperCase(), url, {

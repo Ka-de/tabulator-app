@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { PopupService } from '@app/features/popup';
 import { AppState } from '@app/store';
+import { dataSize } from '@app/utils/object.size';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { TableCreateComponent } from './components/table-create/table-create.component';
@@ -20,6 +21,7 @@ export class TablesComponent implements OnInit {
   tables!: Table[];
   subscriptions = new Subscription();
   selectedTable!: Table;
+  dataSize = dataSize;
 
   public tableEvents = TableEvents;
 

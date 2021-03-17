@@ -21,8 +21,12 @@
                     (mouseenter)="selectedTable = table;">
                     <td class="tables-main-list-tbody-tr-td">{{table.title}}</td>
                     <td class="tables-main-list-tbody-tr-td">{{table.rows.length}}</td>
-                    <td class="tables-main-list-tbody-tr-td">{{table.rows.length}}</td>
-                    <td class="tables-main-list-tbody-tr-td">{{table.rows.length}}</td>
+                    <td class="tables-main-list-tbody-tr-td">{{dataSize(table.rows)
+                        ? dataSize(table.rows)/table.rows.length
+                        : dataSize(table.rows)
+                        }} B</td>
+                    <td class="tables-main-list-tbody-tr-td">{{dataSize(table.rows)}} B</td>
+
 
                     <span #TableOptions *ngIf="showOption(table)" class="table-options">
                         <i class="table-options-item fa fa-eye" (click)="emitTableEvent(tableEvents.VIEW)"></i>

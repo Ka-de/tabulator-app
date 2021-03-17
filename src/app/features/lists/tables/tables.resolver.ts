@@ -13,6 +13,7 @@ export class TableResolver implements Resolve<Subscription>{
     ) { }
 
     resolve() {
+        //resolve a table_id and get the table
         return this.store.select(state => state.router.state.params.id)
             .pipe(
                 take(1)

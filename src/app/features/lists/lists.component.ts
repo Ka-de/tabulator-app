@@ -39,6 +39,7 @@ export class ListsComponent implements OnInit {
     this.reload();
 
     this.subscriptions.add(
+      // get all tables
       this.store.select(selectAllTables).subscribe(
         tables => this.tables = tables
       )
@@ -63,6 +64,7 @@ export class ListsComponent implements OnInit {
       : false;
   }
 
+  //reload the view
   reload(){
     this.store.dispatch(new GetTables());
   }
