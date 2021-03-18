@@ -27,6 +27,10 @@
         overflow: hidden;
     }
 
+    &-window.open-sidebar {
+        grid-template-columns: 80% 20%;
+    }
+
     &-sidebar {
         background-color: var(--minor-color);
         color: var(--major-color);
@@ -34,7 +38,6 @@
         grid-template-rows: repeat(3, max-content) 1fr;
         gap: 1vh;
         overflow: hidden;
-        max-width: 300px;
 
         &-header {
             display: grid;
@@ -64,7 +67,7 @@
                 display: grid;
                 align-items: center;
                 grid-template-columns: max-content max-content;
-                gap: .5vw;
+                gap: 0.5vw;
 
                 &-number {
                     color: var(--extra-color);
@@ -107,37 +110,36 @@
                 flex-direction: column;
                 align-content: flex-start;
 
-                &-item{
+                &-item {
                     display: grid;
                     grid-template-columns: max-content 1fr max-content max-content;
-                    gap: .5vw;
+                    gap: 0.5vw;
                     align-items: center;
-                    margin: .5vh 0vw;
-                    padding: .5vh 1vw;
+                    margin: 0.5vh 0vw;
+                    padding: 0.5vh 1vw;
                     filter: brightness(50%);
                     cursor: pointer;
 
-                    &-control{
+                    &-control {
                         display: grid;
                         align-items: center;
-                        gap: .3vw;
+                        gap: 0.3vw;
                         grid-template-columns: repeat(2, max-content);
                     }
 
-                    &-icon{
+                    &-icon {
                         display: flex;
                         align-items: center;
                         justify-content: center;
                         cursor: pointer;
                     }
 
-                    &-icon:hover{
+                    &-icon:hover {
                         color: var(--extra-color);
                     }
-                    
                 }
 
-                &-item:hover{
+                &-item:hover {
                     filter: brightness(100%);
                     border-left: 4px solid var(--extra-color);
                 }
@@ -207,11 +209,27 @@
             }
         }
 
-        &-wrapper{
+        &-wrapper {
             height: 100%;
             width: 100%;
             display: block;
             overflow: hidden;
         }
+    }
+}
+
+.open-sidebar .lists-container-wrapper {
+    opacity: 0.2;
+}
+
+@media (min-width: 700px) {
+    .lists {
+        &-window.open-sidebar {
+            grid-template-columns: max-content 1fr;
+        }
+    }
+
+    .open-sidebar .lists-container-wrapper {
+        opacity: 1;
     }
 }

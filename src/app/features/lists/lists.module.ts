@@ -34,6 +34,8 @@ import { AttributesColumnComponent } from './tables/components/columns/column-at
 import { DatatypesComponent } from './tables/components/rows/datatypes/datatypes.component';
 import { LongtextColumnComponent } from './tables/components/columns/column-attributes/longtext-column/longtext-column.component';
 import { TableResolver } from './tables/tables.resolver';
+import { CloneColumnComponent } from './tables/components/columns/clone-column/clone-column.component';
+import { CloneRowComponent } from './tables/components/rows/clone-row/clone-row.component';
 
 const routes: Routes = [
   {
@@ -78,7 +80,9 @@ const routes: Routes = [
     FormularColumnComponent,
     AttributesColumnComponent,
     DatatypesComponent,
-    LongtextColumnComponent
+    LongtextColumnComponent,
+    CloneColumnComponent,
+    CloneRowComponent
   ],
   imports: [
     CommonModule,

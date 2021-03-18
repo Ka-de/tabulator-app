@@ -8,3 +8,8 @@ export interface TableColumnDTO {
     unique?: boolean;
     attributes?: any;
 }
+
+export interface TableColumnCloneDTO extends TableColumnDTO {
+    withrows: boolean;
+    from: string;
+}

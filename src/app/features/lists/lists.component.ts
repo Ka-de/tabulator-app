@@ -28,6 +28,8 @@ export class ListsComponent implements OnInit {
   tableDelete = TableDeleteComponent;
   tableCreate = TableCreateComponent;
 
+  search = '';
+
   public _id!: string;
   constructor(
     public router: Router,
@@ -48,14 +50,25 @@ export class ListsComponent implements OnInit {
 
   toggleSidebar(sidebar: HTMLElement, toggleSidebar: HTMLElement) {
     sidebar.classList.toggle('reduced');
+    sidebar.parentElement?.classList.toggle('open-sidebar');
     toggleSidebar.classList.toggle('fa-angle-right');
     toggleSidebar.classList.toggle('fa-angle-left')
   }
 
   openSidebar(sidebar: HTMLElement, toggleSidebar: HTMLElement) {
     sidebar.classList.remove('reduced');
+    sidebar.parentElement?.classList.add('open-sidebar');
     toggleSidebar.classList.remove('fa-angle-right');
     toggleSidebar.classList.add('fa-angle-left')
+  }
+
+  closeSidebar(sidebar: HTMLElement, toggleSidebar: HTMLElement, event: Event) {
+    if (event.target != toggleSidebar) {
+      sidebar.classList.add('reduced');
+      sidebar.parentElement?.classList.remove('open-sidebar');
+      toggleSidebar.classList.add('fa-angle-right');
+      toggleSidebar.classList.remove('fa-angle-left');
+    }
   }
 
   showTableOptions(table: Table) {
@@ -65,7 +78,11 @@ export class ListsComponent implements OnInit {
   }
 
   //reload the view
-  reload(){
+  reload() {
     this.store.dispatch(new GetTables());
+  }
+
+  searchTable(table: Table) {
+    return table.title.toLocaleLowerCase().includes(this.search.toLocaleLowerCase());
   }
 }

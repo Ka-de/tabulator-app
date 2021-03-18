@@ -21,13 +21,15 @@
             </span>
             <span class="lists-sidebar-search">
                 <i class="fa fa-search lists-sidebar-search-icon"></i>
-                <input type="text" class="lists-sidebar-search-box hide" placeholder="filter">
+                <input #Search type="text" class="lists-sidebar-search-box hide" placeholder="filter"
+                    (keyup)="search = Search.value">
             </span>
             <span class="lists-sidebar-pane hide">
-                <span class="lists-sidebar-pane-wrapper">
+                <span class="lists-sidebar-pane-wrapper" #TableList>
                     <span #Table *ngFor="let table of tables" class="lists-sidebar-pane-wrapper-item"
                         (mouseenter)="selectedTable = table; displayTableOptions = true"
-                        (mouseleave)="displayTableOptions = false">
+                        (mouseleave)="displayTableOptions = false"
+                        [style.display]="searchTable(table) ? 'grid' : 'none'">
                         <i class="fa fa-angle-right lists-sidebar-pane-wrapper-item-icon"></i>
                         <span routerLink="/lists/tables/{{table._id}}">{{table.title}}</span>
                         <span *ngIf="showTableOptions(table)" class="lists-sidebar-pane-wrapper-item-control">
@@ -46,14 +48,15 @@
                 </span>
             </span>
         </section>
-        <section class="lists-container">
+        <section class="lists-container" (click)="closeSidebar(Sidebar, ToggleSidebar, $event)">
             <div class="lists-container-header">
                 <i #ToggleSidebar class="lists-container-header-sidebarcontrol fa fa-angle-right"
                     (click)="toggleSidebar(Sidebar, ToggleSidebar)"></i>
                 <span class="lists-container-header-name">Tabulator 0.0.0</span>
             </div>
-
-            <router-outlet></router-outlet>
+            <div class="lists-container-wrapper">
+                <router-outlet></router-outlet>
+            </div>
         </section>
     </div>
 </div>

@@ -1,5 +1,5 @@
 import { Entity } from "@app/utils/custom.type";
-import { TableColumnDTO } from "../dtos/tables.dto";
+import { TableColumnDTO } from "../dtos/tables-column.dto";
 
 export class TableRow {
     r_id!: string;

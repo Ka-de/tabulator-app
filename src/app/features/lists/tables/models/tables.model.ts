@@ -6,10 +6,6 @@ export interface TableEditable {
     description?: string;
 }
 
-export interface TableDTO extends TableEditable {
-    attatchments: string[];
-}
-
 export enum TableDataTypes {
     TEXT = "text",
     LONGTEXT = "longtext",

@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
+import { TableColumnCloneDTO, TableColumnDTO } from './dtos/tables-column.dto';
 import { TableRowDTO } from './dtos/tables-row.dto';
-import { TableColumnDTO } from './dtos/tables.dto';
+import { TableDTO } from './dtos/tables.dto';
 import { TableColumn } from './models/tables-column.model';
 import { TableRow } from './models/tables-rows.model';
-import { Table, TableDTO, TableEditable } from './models/tables.model';
+import { Table, TableEditable } from './models/tables.model';
 
 @Injectable()
 export class TablesService {
@@ -52,6 +53,10 @@ export class TablesService {
 
   updateTableColumn(_id: string, column_id: string, data: Partial<TableColumnDTO>) {
     return this.request<TableColumn>('patch', `${_id}/columns/${column_id}`, data);
+  }
+
+  cloneTableColumn(_id: string, data: Partial<TableColumnCloneDTO>) {
+    return this.request<Table>('put', `${_id}/columns`, data);
   }
 
   deleteTableColumn(_id: string, column_id: string) {

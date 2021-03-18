@@ -1,16 +1,12 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PopupService } from '@app/features/popup';
-import { ToastService } from '@app/features/toast/toast.service';
 import { AppState } from '@app/store';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { TableColumnDTO } from '@app/features/lists/tables/dtos/tables.dto';
 import { Table, TableDataTypes } from '@app/features/lists/tables/models/tables.model';
-import { CreateTableColumn, TablesActionsType } from '@app/features/lists/tables/tables-store/tables.action';
-import { selectCurrentTable } from '../../../tables-store/tables.selector';
-import { last, take, withLatestFrom } from 'rxjs/operators';
-import { ActivatedRoute, Router } from '@angular/router';
+import { CreateTableColumn } from '@app/features/lists/tables/tables-store/tables.action';
+import { TableColumnDTO } from '../../../dtos/tables-column.dto';
 
 @Component({
   selector: 'app-create-column',

@@ -16,6 +16,8 @@ import { EditRowComponent } from '../rows/edit-row/edit-row.component';
 import { CreateRowComponent } from '../rows/create-row/create-row.component';
 import { DeleteRowComponent } from '../rows/delete-row/delete-row.component';
 import { dataSize } from '@app/utils/object.size';
+import { TableRowDTO } from '../../dtos/tables-row.dto';
+import { CloneColumnComponent } from '../columns/clone-column/clone-column.component';
 
 @Component({
   selector: 'app-table-single',
@@ -35,6 +37,7 @@ export class TableSingleComponent implements OnInit {
 
   createColumn = CreateColumnComponent;
   editColumn = EditColumnComponent;
+  cloneColumn = CloneColumnComponent;
   deleteColumn = DeleteColumnComponent;
   createRow = CreateRowComponent;
   editRow = EditRowComponent;
@@ -81,5 +84,16 @@ export class TableSingleComponent implements OnInit {
       }
     }
     return data;
+  }
+
+  sort(column: TableColumn) {
+    this.rows = JSON.parse(JSON.stringify(this.rows))
+      .sort((a: any, b: any) => {
+        return (a)[column.name] < b[column.name] ? 1 : -1;
+      });
+  }
+
+  cloneRow(row: TableRowDTO) {
+
   }
 }

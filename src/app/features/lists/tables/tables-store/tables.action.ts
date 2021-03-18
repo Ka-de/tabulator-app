@@ -1,9 +1,10 @@
 import { Action } from "@ngrx/store";
+import { TableColumnCloneDTO, TableColumnDTO } from "../dtos/tables-column.dto";
 import { TableRowDTO } from "../dtos/tables-row.dto";
-import { TableColumnDTO } from "../dtos/tables.dto";
+import { TableDTO } from "../dtos/tables.dto";
 import { TableColumn } from "../models/tables-column.model";
 import { TableRow } from "../models/tables-rows.model";
-import { Table, TableDTO, TableEditable } from "../models/tables.model";
+import { Table, TableEditable } from "../models/tables.model";
 
 export enum TablesActionsType {
     GET_TABLES = "[TABLES] Get",
@@ -26,6 +27,9 @@ export enum TablesActionsType {
 
     UPDATE_TABLE_COLUMN = "[TABLE_COLUMN] Update",
     UPDATE_TABLE_COLUMN_SUCCESS = "[TABLE_COLUMN] Update Success",
+
+    CLONE_TABLE_COLUMN = "[TABLE_COLUMN] Clone",
+    CLONE_TABLE_COLUMN_SUCCESS = "[TABLE_COLUMN] Clone Success",
 
     DELETE_TABLE_COLUMN = "[TABLE_COLUMN] Delete",
     DELETE_TABLE_COLUMN_SUCCESS = "[TABLE_COLUMN] Delete Success",
@@ -108,6 +112,16 @@ export class UpdateTableColumn implements Action {
 export class UpdateTableColumnSuccess implements Action {
     readonly type = TablesActionsType.UPDATE_TABLE_COLUMN_SUCCESS;
     constructor(public payload: { _id: string, column: TableColumn }) { }
+}
+
+export class CloneTableColumn implements Action {
+    readonly type = TablesActionsType.CLONE_TABLE_COLUMN;
+    constructor(public payload: { _id: string, data: Partial<TableColumnCloneDTO> }) { }
+}
+
+export class CloneTableColumnSuccess implements Action {
+    readonly type = TablesActionsType.CLONE_TABLE_COLUMN_SUCCESS;
+    constructor(public payload: Table) { }
 }
 
 export class DeleteTableColumn implements Action {

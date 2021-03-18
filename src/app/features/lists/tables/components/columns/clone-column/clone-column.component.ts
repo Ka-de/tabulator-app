@@ -4,23 +4,26 @@ import { PopupService } from '@app/features/popup';
 import { AppState } from '@app/store';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { TableColumnDTO } from '../../../dtos/tables-column.dto';
+import { TableColumnCloneDTO } from '../../../dtos/tables-column.dto';
 import { TableColumn } from '../../../models/tables-column.model';
 import { Table, TableDataTypes } from '../../../models/tables.model';
-import { UpdateTableColumn } from '../../../tables-store/tables.action';
+import { CloneTableColumn, UpdateTableColumn } from '../../../tables-store/tables.action';
 
 @Component({
-  selector: 'app-edit-column',
-  templateUrl: './edit-column.component.html',
-  styleUrls: ['./edit-column.component.scss']
+  selector: 'app-clone-column',
+  templateUrl: './clone-column.component.html',
+  styleUrls: ['./clone-column.component.scss']
 })
-export class EditColumnComponent implements OnInit {
+export class CloneColumnComponent implements OnInit {
+
   @Input() data!: { table: Table, column: TableColumn };
 
   dataTypes = Object.values(TableDataTypes);
   subscriptions = new Subscription();
   attributes!: any;
   columnForm!: FormGroup;
+  originalType!: string;
+  from!: string;
 
   set type(datatype: string) {
     this.data.column = { ...this.data.column, 'datatype': datatype as TableDataTypes };
@@ -42,17 +45,21 @@ export class EditColumnComponent implements OnInit {
       datatype: [this.data.column.datatype, Validators.required],
       description: [this.data.column.description],
       required: [this.data.column.required],
-      unique: [this.data.column.unique]
+      unique: [this.data.column.unique],
+      withrows: [false]
     });
 
     if (this.data.column) {
       this.attributes = this.data.column.attributes;
-    }    
+      this.originalType = this.data.column.datatype;
+      this.from = this.data.column.name;
+    }
   }
 
-  updateColumn() {
-    const data: TableColumnDTO = { ...this.columnForm.getRawValue(), attributes: this.attributes };
-    this.store.dispatch(new UpdateTableColumn({ _id: this.data.table._id, column_id: this.data.column._id, data }));
+  cloneColumn() {
+    const data: TableColumnCloneDTO = { ...this.columnForm.getRawValue(), from: this.from, attributes: this.attributes };
+    
+    this.store.dispatch(new CloneTableColumn({ _id: this.data.table._id, data }));
   }
 
   setAttributes(event: any) {

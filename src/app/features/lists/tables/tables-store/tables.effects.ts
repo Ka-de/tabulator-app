@@ -9,7 +9,7 @@ import { Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
 import { mergeMap, tap, map, catchError } from "rxjs/operators";
 import { TablesService } from "../tables.service";
-import { CreateTable, CreateTableColumn, CreateTableColumnSuccess, CreateTableRow, CreateTableRowSuccess, CreateTableSuccess, DeleteTable, DeleteTableColumn, DeleteTableColumnSuccess, DeleteTableRow, DeleteTableRowSuccess, DeleteTableSuccess, GetTable, GetTables, GetTablesSuccess, GetTableSuccess, TablesAction, TablesActionsType, UpdateTable, UpdateTableColumn, UpdateTableColumnSuccess, UpdateTableRow, UpdateTableRowSuccess, UpdateTableSuccess } from "./tables.action";
+import { CloneTableColumn, CloneTableColumnSuccess, CreateTable, CreateTableColumn, CreateTableColumnSuccess, CreateTableRow, CreateTableRowSuccess, CreateTableSuccess, DeleteTable, DeleteTableColumn, DeleteTableColumnSuccess, DeleteTableRow, DeleteTableRowSuccess, DeleteTableSuccess, GetTable, GetTables, GetTablesSuccess, GetTableSuccess, TablesAction, TablesActionsType, UpdateTable, UpdateTableColumn, UpdateTableColumnSuccess, UpdateTableRow, UpdateTableRowSuccess, UpdateTableSuccess } from "./tables.action";
 
 @Injectable()
 export class TablesEffects {
@@ -135,6 +135,24 @@ export class TablesEffects {
                 });
                 this.popupService.close('edit-column');
                 return new UpdateTableColumnSuccess({ _id: action.payload._id, column });
+            }),
+            catchError(err => of(new AddError(err.error)))
+        ))
+    );
+
+    @Effect()
+    cloneTableColumn$: Observable<TablesAction> = this.action$.pipe(
+        ofType<CloneTableColumn>(TablesActionsType.CLONE_TABLE_COLUMN),
+        tap(() => this.store.dispatch(new RemoveError)),
+        mergeMap((action: CloneTableColumn) => this.tablesService.cloneTableColumn(action.payload._id, action.payload.data).pipe(
+            map(table => {
+                this.toastService.showMessage({
+                    title: 'Clone column',
+                    details: 'Column clone was successful',
+                    type: 'success'
+                });
+                this.popupService.close('clone-column');
+                return new CloneTableColumnSuccess(table);
             }),
             catchError(err => of(new AddError(err.error)))
         ))

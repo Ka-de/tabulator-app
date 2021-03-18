@@ -2,7 +2,7 @@ import { Entity } from "@app/utils/custom.type";
 import { TableColumn } from "../models/tables-column.model";
 import { TableRow } from "../models/tables-rows.model";
 import { Table } from "../models/tables.model";
-import { CreateTableColumnSuccess, CreateTableRowSuccess, CreateTableSuccess, DeleteTableColumnSuccess, DeleteTableRowSuccess, DeleteTableSuccess, GetTable, GetTablesSuccess, GetTableSuccess, TablesAction, TablesActionsType, UpdateTableColumnSuccess, UpdateTableRowSuccess, UpdateTableSuccess } from "./tables.action";
+import { CloneTableColumnSuccess, CreateTableColumnSuccess, CreateTableRowSuccess, CreateTableSuccess, DeleteTableColumnSuccess, DeleteTableRowSuccess, DeleteTableSuccess, GetTable, GetTablesSuccess, GetTableSuccess, TablesAction, TablesActionsType, UpdateTableColumnSuccess, UpdateTableRowSuccess, UpdateTableSuccess } from "./tables.action";
 
 export interface TableState {
     tables: Entity<Table>;
@@ -36,6 +36,8 @@ export function tableReducer(state = initialState, action: TablesAction): TableS
             return { ...state, loading: true, loaded: false, action: TablesActionsType.CREATE_TABLE_COLUMN }
         case TablesActionsType.UPDATE_TABLE_COLUMN:
             return { ...state, loading: true, loaded: false, action: TablesActionsType.UPDATE_TABLE_COLUMN }
+        case TablesActionsType.CLONE_TABLE_COLUMN:
+            return { ...state, loading: true, loaded: false, action: TablesActionsType.CLONE_TABLE_COLUMN }
         case TablesActionsType.DELETE_TABLE_COLUMN:
             return { ...state, loading: true, loaded: false, action: TablesActionsType.DELETE_TABLE_COLUMN }
         case TablesActionsType.CREATE_TABLE_ROW:
@@ -140,6 +142,15 @@ export function tableReducer(state = initialState, action: TablesAction): TableS
                 loading: false,
                 loaded: true
             }
+        case TablesActionsType.CLONE_TABLE_COLUMN_SUCCESS:
+            return {
+                ...state,
+                tables: {
+                    ...state.tables, [(action as CloneTableColumnSuccess).payload._id]: (action as CloneTableColumnSuccess).payload
+                },
+                loading: false,
+                loaded: true
+            }
         case TablesActionsType.DELETE_TABLE_COLUMN_SUCCESS:
             return {
                 ...state,
@@ -204,7 +215,7 @@ export function tableReducer(state = initialState, action: TablesAction): TableS
                                 r.r_id !== (action as DeleteTableRowSuccess).payload.row_id
                             );
                         }
-                        return {...state.tables[key], rows};
+                        return { ...state.tables[key], rows };
                     })
                     .reduce((acc, table) => ({ ...acc, [table._id]: table }), {}),
                 loading: false,

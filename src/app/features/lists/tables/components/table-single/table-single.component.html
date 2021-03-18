@@ -13,7 +13,9 @@
                 </span>
                 <span class="table-single-header-details-descriptions-item">
                     <span class="table-single-header-details-descriptions-item-name">Avg. Size</span>
-                    <span class="table-single-header-details-descriptions-item-value">{{dataSize(table.rows)/table.rows.length}} B</span>
+                    <span
+                        class="table-single-header-details-descriptions-item-value">{{dataSize(table.rows)/table.rows.length}}
+                        B</span>
                 </span>
             </span>
         </span>
@@ -56,17 +58,19 @@
                                 <i class="fa fa-ellipsis-v table-single-main-list-thead-tr-th-wrapper-toggle"></i>
                                 <span *ngIf="showColumnOptions(column)"
                                     class="table-single-main-list-thead-tr-th-wrapper-options">
-                                    <p class="table-single-main-list-thead-tr-th-wrapper-options-item">
+                                    <p (click)="sort(column)"
+                                        class="table-single-main-list-thead-tr-th-wrapper-options-item">
                                         Sort By
                                     </p>
                                     <p (click)="popupService.open('edit-column', {'table': table, 'column': column})"
                                         class="table-single-main-list-thead-tr-th-wrapper-options-item">
                                         Edit
                                     </p>
-                                    <p class="table-single-main-list-thead-tr-th-wrapper-options-item">
+                                    <p (click)="popupService.open('clone-column', {'table': table, 'column': column})" class="table-single-main-list-thead-tr-th-wrapper-options-item">
                                         Clone
                                     </p>
-                                    <p (click)="popupService.open('delete-column', {'table': table, 'column': column})" class="
+                                    <p (click)="popupService.open('delete-column', {'table': table, 'column': column})"
+                                        class="
                                     table-single-main-list-thead-tr-th-wrapper-options-item">
                                         Delete
                                     </p>
@@ -84,7 +88,8 @@
                     <span *ngIf="showRowOptions(row)" class="table-options">
                         <i class="table-options-item fa fa-pencil"
                             (click)="popupService.open('edit-row', {'table': table, 'row': row});"></i>
-                        <i class="table-options-item fa fa-trash" (click)="popupService.open('delete-row', {'table': table, 'row': row})"></i>
+                        <i class="table-options-item fa fa-trash"
+                            (click)="popupService.open('delete-row', {'table': table, 'row': row})"></i>
                     </span>
                 </tr>
             </tbody>
@@ -95,6 +100,8 @@
 <app-popup id="add-column" heading="Create a Column" [component]="createColumn"></app-popup>
 
 <app-popup id="edit-column" heading="Edit Column" [component]="editColumn"></app-popup>
+
+<app-popup id="clone-column" heading="Clone Column" [component]="cloneColumn"></app-popup>
 
 <app-popup id="delete-column" heading="Delete Column" [component]="deleteColumn"></app-popup>
 
