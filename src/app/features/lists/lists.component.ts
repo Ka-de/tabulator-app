@@ -62,8 +62,8 @@ export class ListsComponent implements OnInit {
     toggleSidebar.classList.add('fa-angle-left')
   }
 
-  closeSidebar(sidebar: HTMLElement, toggleSidebar: HTMLElement, event: Event) {
-    if (event.target != toggleSidebar) {
+  closeSidebar(sidebar: HTMLElement, toggleSidebar: HTMLElement, event?: Event) {
+    if (!event || event?.target != toggleSidebar) {
       sidebar.classList.add('reduced');
       sidebar.parentElement?.classList.remove('open-sidebar');
       toggleSidebar.classList.add('fa-angle-right');

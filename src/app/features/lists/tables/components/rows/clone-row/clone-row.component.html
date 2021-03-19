@@ -1,1 +1,12 @@
-<p>clone-row works!</p>
+<form (submit)="cloneRow()" class="row-form" #rowForm="ngForm" *ngIf="data.table && data.row">
+    <div class="row-form-inputs">
+        <span class="row-form-inputs-group" *ngFor="let column of data.table.columns">
+            <app-datatypes [column]="column" (update)="setData($event, column)" [data]="content[column.name]">
+            </app-datatypes>
+        </span>
+    </div>
+    <div class="row-form-controls">
+        <button class="row-form-controls-button" [disabled]="invalid">Clone</button>
+        <button type="button" class="row-form-controls-button" (click)="close()">Cancel</button>
+    </div>
+</form>

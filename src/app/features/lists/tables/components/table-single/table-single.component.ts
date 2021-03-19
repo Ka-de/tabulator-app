@@ -18,6 +18,7 @@ import { DeleteRowComponent } from '../rows/delete-row/delete-row.component';
 import { dataSize } from '@app/utils/object.size';
 import { TableRowDTO } from '../../dtos/tables-row.dto';
 import { CloneColumnComponent } from '../columns/clone-column/clone-column.component';
+import { CloneRowComponent } from '../rows/clone-row/clone-row.component';
 
 @Component({
   selector: 'app-table-single',
@@ -41,6 +42,7 @@ export class TableSingleComponent implements OnInit {
   deleteColumn = DeleteColumnComponent;
   createRow = CreateRowComponent;
   editRow = EditRowComponent;
+  cloneRow = CloneRowComponent;
   deleteRow = DeleteRowComponent;
 
   get tableData() {
@@ -91,9 +93,5 @@ export class TableSingleComponent implements OnInit {
       .sort((a: any, b: any) => {
         return (a)[column.name] < b[column.name] ? 1 : -1;
       });
-  }
-
-  cloneRow(row: TableRowDTO) {
-
   }
 }

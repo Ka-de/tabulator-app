@@ -66,7 +66,8 @@
                                         class="table-single-main-list-thead-tr-th-wrapper-options-item">
                                         Edit
                                     </p>
-                                    <p (click)="popupService.open('clone-column', {'table': table, 'column': column})" class="table-single-main-list-thead-tr-th-wrapper-options-item">
+                                    <p (click)="popupService.open('clone-column', {'table': table, 'column': column})"
+                                        class="table-single-main-list-thead-tr-th-wrapper-options-item">
                                         Clone
                                     </p>
                                     <p (click)="popupService.open('delete-column', {'table': table, 'column': column})"
@@ -88,6 +89,8 @@
                     <span *ngIf="showRowOptions(row)" class="table-options">
                         <i class="table-options-item fa fa-pencil"
                             (click)="popupService.open('edit-row', {'table': table, 'row': row});"></i>
+                        <i class="table-options-item fa fa-copy"
+                            (click)="popupService.open('clone-row', {'table': table, 'row': row})"></i>
                         <i class="table-options-item fa fa-trash"
                             (click)="popupService.open('delete-row', {'table': table, 'row': row})"></i>
                     </span>
@@ -108,5 +111,7 @@
 <app-popup id="add-row" heading="Insert a Row" [component]="createRow"></app-popup>
 
 <app-popup id="edit-row" heading="Edit Row" [component]="editRow"></app-popup>
+
+<app-popup id="clone-row" heading="Clone Row" [component]="cloneRow"></app-popup>
 
 <app-popup id="delete-row" heading="Delete Row" [component]="deleteRow"></app-popup>

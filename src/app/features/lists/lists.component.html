@@ -5,7 +5,8 @@
     </menu>
 
     <div class="lists-window">
-        <section class="lists-sidebar reduced" #Sidebar (click)="openSidebar(Sidebar, ToggleSidebar)">
+        <section class="lists-sidebar reduced" #Sidebar (mouseenter)="openSidebar(Sidebar, ToggleSidebar)"
+            (click)="openSidebar(Sidebar, ToggleSidebar)" (mouseleave)="closeSidebar(Sidebar, ToggleSidebar)">
             <span class="lists-sidebar-header" routerLink='tables'>
                 <i class="fa fa-home lists-sidebar-header-icon"></i>
                 <p class="lists-sidebar-header-text hide">My Lists</p>
