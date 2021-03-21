@@ -14,7 +14,6 @@ import { SharedModule } from './utils/shared.module';
 import { NotFoundComponent } from './features/not-found/not-found.component';
 import { PopupService } from './features/popup';
 import { HomeComponent } from './features/home/home.component';
-import { SampleComponent } from './sample/sample.component';
 import { ValidateRow } from './utils/row.validator';
 
 @NgModule({
@@ -23,7 +22,6 @@ import { ValidateRow } from './utils/row.validator';
     ToastComponent,
     NotFoundComponent,
     HomeComponent,
-    SampleComponent,
   ],
   imports: [
     BrowserModule,
