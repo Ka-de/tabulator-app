@@ -178,7 +178,7 @@
     &-container {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: max-content max-content 1fr;
+        grid-template-rows: max-content 1fr;
         align-content: flex-start;
         height: 100%;
         overflow: hidden;
