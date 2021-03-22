@@ -1,4 +1,4 @@
-<div *ngIf="notifications" class="toast">
+<div *ngIf="notifications" class="toast" @fade>
     <span *ngFor="let notification of notifications | async; let i=index" class="toast-item" [ngClass]="
         {
             'is-error': notification.type === 'error',

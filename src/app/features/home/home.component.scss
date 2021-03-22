@@ -1,0 +1,52 @@
+.home {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    height: 100%;
+    background-color: var(--minor-color);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+    &-left {
+        display: grid;
+        justify-items: flex-start;
+        align-content: center;
+        padding: 5em;
+        grid-template-rows: max-content max-content;
+        gap: 5vh;
+
+        &-qoute {
+            font-size: 4vh;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--major-color);
+
+            &-hint{
+                color: var(--extra-color);
+            }
+        }
+
+        &-getstarted {
+            border: none;
+            background-color: var(--extra-color);
+            color: var(--major-color);
+            padding: 1vh 2vw;
+            cursor: pointer;
+            font-size: 3vh;
+        }
+
+        box-shadow: inset 1px 1px 30px var(--minor-color);
+    }
+
+    &-wallpaper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        overflow: hidden;
+
+        &-image {
+            width: 100%;
+            height: 100%;
+            transform: rotate(180deg);
+        }
+    }
+}
