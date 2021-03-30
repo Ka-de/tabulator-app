@@ -1,0 +1,32 @@
+.select {
+    display: grid;
+    grid-template-rows: max-content max-content;
+    align-content: flex-start;
+    gap: 0.2vh;
+
+    &-label {
+        font-weight: bold;
+    }
+
+    &-single {
+        height: 40px;
+        border: 1px solid var(--minor-color);
+        display: flex;
+    }
+
+    &-multiple{
+        height: max-content;
+        max-height: 400px;
+        display: flex;
+        flex-direction: column;
+        align-content: flex-start;
+
+        &-item{
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            gap: .2em;
+            margin: .1em;
+            align-items: center;
+        }
+    }
+}

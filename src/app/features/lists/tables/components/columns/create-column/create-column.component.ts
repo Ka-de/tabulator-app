@@ -43,7 +43,7 @@ export class CreateColumnComponent implements OnInit, OnDestroy {
   }
 
   createColumn() {
-    const data: TableColumnDTO = { ...this.columnForm.getRawValue(), attributes: this.attributes };
+    const data: TableColumnDTO = { ...this.columnForm.getRawValue(), attributes: this.attributes };    
     this.store.dispatch(new CreateTableColumn({ _id: this.data.table._id, data }));
   }
 

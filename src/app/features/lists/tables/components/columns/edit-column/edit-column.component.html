@@ -15,7 +15,8 @@
                 <option *ngFor="let type of dataTypes" [selected]="type == data.column.datatype">{{type}}</option>
             </select>
 
-            <app-column-attributes [type]="type" (update)="setAttributes($event)" [attributes]="data.column.attributes"></app-column-attributes>
+            <app-column-attributes [type]="type" (update)="setAttributes($event)" [attributes]="data.column.attributes">
+            </app-column-attributes>
         </span>
         <span class="column-form-inputs-group">
             <label class="column-forms-inputs-group-label">Required</label>
@@ -27,7 +28,8 @@
         </span>
     </div>
     <div class="column-form-controls">
-        <button class="column-form-controls-button" [disabled]="columnForm.invalid">Update</button>
+        <button type="button" (click)="updateColumn()" class="column-form-controls-button"
+            [disabled]="columnForm.invalid">Update</button>
         <button type="button" class="column-form-controls-button" (click)="close()">Cancel</button>
     </div>
 </form>

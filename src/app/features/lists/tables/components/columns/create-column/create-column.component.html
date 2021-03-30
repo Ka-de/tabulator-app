@@ -1,4 +1,4 @@
-<form (submit)="createColumn()" class="column-form" [formGroup]="columnForm">
+<form class="column-form" [formGroup]="columnForm">
     <div class="column-form-inputs">
         <span class="column-form-inputs-group">
             <label class="column-forms-inputs-group-label">Name *</label>
@@ -27,7 +27,8 @@
         </span>
     </div>
     <div class="column-form-controls">
-        <button class="column-form-controls-button" [disabled]="columnForm.invalid">Create</button>
+        <button type="button" (click)="createColumn()" class="column-form-controls-button"
+            [disabled]="columnForm.invalid">Create</button>
         <button type="button" class="column-form-controls-button" (click)="close()">Cancel</button>
     </div>
 </form>

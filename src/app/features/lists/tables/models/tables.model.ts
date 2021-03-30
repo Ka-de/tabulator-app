@@ -16,13 +16,13 @@ export enum TableDataTypes {
     DATETIME = "datetime",
     MONEY = "money",
     URL = "url",
-    CHOICE = "choice",
+    SELECT = "select",
 
-    LOOKUP = "lookup",    
-    FORMULAR = "formular",
-    COLLECTION = "collection",
+    // LOOKUP = "lookup",    
+    // FORMULAR = "formular",
+    // COLLECTION = "collection",
 
-    IMAGE = "image",
+    // IMAGE = "image",
 }
 
 export interface Table extends TableEditable {

@@ -13,14 +13,14 @@ export class ColumnAttributesComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
   }
 
   isType(type: string) {
     return this.type == type;
   }
 
-  changed(event: any) {            
+  changed(event: any) {
     this.update.emit(event);
   }
 }

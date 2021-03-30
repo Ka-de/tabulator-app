@@ -1,6 +1,9 @@
 <app-table-text-type *ngIf="isType(column.datatype, 'text')" [column]="column" (event)="changed($event)" [data]="data">
 </app-table-text-type>
 
+<app-table-select-type *ngIf="isType(column.datatype, 'select')" [column]="column" (event)="changed($event)" [data]="data">
+</app-table-select-type>
+
 <app-table-longtext-type *ngIf="isType(column.datatype, 'longtext')" [column]="column" (event)="changed($event)"
     [data]="data"></app-table-longtext-type>
 

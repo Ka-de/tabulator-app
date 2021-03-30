@@ -52,6 +52,8 @@ export class CreateRowComponent implements OnInit {
   }
 
   setData(value: any, column: TableColumn) {
+    console.log(value);
+    
     this.content = { ...this.content, [column.name]: value };
     this.validate();
   }

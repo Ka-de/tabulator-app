@@ -6,11 +6,15 @@ import { selectLastToasts } from '@app/features/toast/store/toast.selector';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ToastService } from './toast.service';
+import { fade } from '@app/animations/fade';
 
 @Component({
   selector: 'app-toast',
   templateUrl: './toast.component.html',
-  styleUrls: ['./toast.component.scss']
+  styleUrls: ['./toast.component.scss'],
+  animations: [
+    fade
+  ]
 })
 export class ToastComponent implements OnInit {
   notifications!: Observable<Toast[]>

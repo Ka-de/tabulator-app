@@ -1,0 +1,17 @@
+<div class="select">
+    <span class="select-data">
+        <label>Enter Select Options</label>
+        <span class="select-data-box">
+            <span class="select-data-box-option" *ngFor="let option of options; let i = index">
+                <a class="select-data-box-option-text">{{option}}</a>
+                <i class="fa fa-times select-data-box-option-remove" (click)="remove(i)"></i>
+            </span>
+            <input (keyup)="monitor($event)" (change)="changed()" type="text" class="select-data-box-input">
+        </span>
+    </span>
+    <span class="select-multiple">
+        <label>Multiple Selection</label>
+        <input #Multiple type="checkbox" (change)="multiple = Multiple.checked; changed()" class="select-multiple-input"
+            [checked]="multiple">
+    </span>
+</div>

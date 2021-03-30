@@ -84,6 +84,11 @@ export class TableSingleComponent implements OnInit {
       if (column.datatype == TableDataTypes.MONEY) {
         return data.amount;
       }
+      else if (column.datatype == TableDataTypes.SELECT && column.attributes?.multiple) {
+        if (Array.isArray(data)) {
+          return `[${data.join(', ')}]`
+        }
+      }
     }
     return data;
   }

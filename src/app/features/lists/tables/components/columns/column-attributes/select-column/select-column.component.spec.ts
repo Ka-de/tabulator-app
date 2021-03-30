@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChoiceColumnComponent } from './choice-column.component';
+import { SelectColumnComponent } from './select-column.component';
 
-describe('ChoiceColumnComponent', () => {
-  let component: ChoiceColumnComponent;
-  let fixture: ComponentFixture<ChoiceColumnComponent>;
+describe('SelectColumnComponent', () => {
+  let component: SelectColumnComponent;
+  let fixture: ComponentFixture<SelectColumnComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChoiceColumnComponent ]
+      declarations: [ SelectColumnComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChoiceColumnComponent);
+    fixture = TestBed.createComponent(SelectColumnComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

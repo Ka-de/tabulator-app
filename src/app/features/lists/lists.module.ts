@@ -25,7 +25,6 @@ import { TableBooleanTypeComponent } from './tables/components/rows/datatypes/ta
 import { TableMoneyTypeComponent } from './tables/components/rows/datatypes/table-money-type/table-money-type.component';
 import { TableUrlTypeComponent } from './tables/components/rows/datatypes/table-url-type/table-url-type.component';
 import { ColumnAttributesComponent } from './tables/components/columns/column-attributes/column-attributes.component';
-import { ChoiceColumnComponent } from './tables/components/columns/column-attributes/choice-column/choice-column.component';
 import { MoneyColumnComponent } from './tables/components/columns/column-attributes/money-column/money-column.component';
 import { LookupColumnComponent } from './tables/components/columns/column-attributes/lookup-column/lookup-column.component';
 import { TableColumnComponent } from './tables/components/columns/column-attributes/table-column/table-column.component';
@@ -36,6 +35,8 @@ import { LongtextColumnComponent } from './tables/components/columns/column-attr
 import { TableResolver } from './tables/tables.resolver';
 import { CloneColumnComponent } from './tables/components/columns/clone-column/clone-column.component';
 import { CloneRowComponent } from './tables/components/rows/clone-row/clone-row.component';
+import { SelectColumnComponent } from './tables/components/columns/column-attributes/select-column/select-column.component';
+import { TableSelectTypeComponent } from './tables/components/rows/datatypes/table-select-type/table-select-type.component';
 
 const routes: Routes = [
   {
@@ -73,7 +74,6 @@ const routes: Routes = [
     TableMoneyTypeComponent,
     TableUrlTypeComponent,
     ColumnAttributesComponent,
-    ChoiceColumnComponent,
     MoneyColumnComponent,
     LookupColumnComponent,
     TableColumnComponent,
@@ -82,7 +82,9 @@ const routes: Routes = [
     DatatypesComponent,
     LongtextColumnComponent,
     CloneColumnComponent,
-    CloneRowComponent
+    CloneRowComponent,
+    SelectColumnComponent,
+    TableSelectTypeComponent
   ],
   imports: [
     CommonModule,

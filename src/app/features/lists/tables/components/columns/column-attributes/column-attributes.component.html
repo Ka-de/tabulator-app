@@ -1,5 +1,5 @@
 <span class="column-attributes">
-    <app-choice-column *ngIf="isType('choice')" (update)="changed($event)" [data]="attributes"></app-choice-column>
+    <app-select-column *ngIf="isType('select')" (update)="changed($event)" [data]="attributes"></app-select-column>
     <app-formular-column *ngIf="isType('formular')" (update)="changed($event)" [data]="attributes"></app-formular-column>
     <app-lookup-column *ngIf="isType('lookup')" (update)="changed($event)" [data]="attributes"></app-lookup-column>
     <app-money-column *ngIf="isType('money')" (update)="changed($event)" [data]="attributes"></app-money-column>

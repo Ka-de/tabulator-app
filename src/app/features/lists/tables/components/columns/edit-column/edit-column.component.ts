@@ -52,6 +52,8 @@ export class EditColumnComponent implements OnInit {
 
   updateColumn() {
     const data: TableColumnDTO = { ...this.columnForm.getRawValue(), attributes: this.attributes };
+    console.log(data);
+    
     this.store.dispatch(new UpdateTableColumn({ _id: this.data.table._id, column_id: this.data.column._id, data }));
   }
 

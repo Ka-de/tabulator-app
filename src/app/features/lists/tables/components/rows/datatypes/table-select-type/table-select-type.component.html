@@ -1,0 +1,12 @@
+<span class="select">
+    <label class="select-label">{{column.name}} {{ column.required ? '*': ''}}</label>
+    <select #Select class="select-single" *ngIf="!column.attributes?.multiple" (change)="changed(Select.value)">
+        <option *ngFor="let option of column.attributes?.options" [value]="option">{{option}}</option>
+    </select>
+    <span class="select-multiple" *ngIf="column.attributes?.multiple">
+        <span *ngFor="let option of column.attributes?.options" class="select-multiple-item">
+            <input type="checkbox" (change)="toggle(option)">
+            <span class="select-multiple-item-value">{{option}}</span>
+        </span>
+    </span>
+</span>
