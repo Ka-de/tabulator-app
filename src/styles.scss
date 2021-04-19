@@ -38,3 +38,46 @@ body {
         color: var(--extra-color);
     }
 }
+
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 5px;
+    background-color: var(--extra-color);
+    z-index: 1001;
+}
+
+#loader.loading{
+    right: 20%;
+    animation: loading infinite ease-in-out 2s;
+}
+
+#loader.loaded{
+    right: 100%;
+    animation: loaded ease-in-out .5s;
+}
+
+@keyframes loading {
+    0%{
+        width: 0%;
+    }
+
+    100%{
+        width: 80%;
+    }
+}
+
+@keyframes loaded {
+    0%{
+        width: 80%;
+    }
+
+    99%{
+        width: 100%;
+    }
+
+    100%{
+        display: none;
+    }
+}

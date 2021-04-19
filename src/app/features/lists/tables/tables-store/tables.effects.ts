@@ -4,6 +4,7 @@ import { PopupService } from "@app/features/popup";
 import { ToastService } from "@app/features/toast/toast.service";
 import { AppState } from "@app/store";
 import { AddError, RemoveError } from "@app/store/error/error.action";
+import { loaded, loading } from "@app/utils/loading";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
@@ -25,8 +26,10 @@ export class TablesEffects {
     @Effect()
     getTables$: Observable<TablesAction> = this.action$.pipe(
         ofType<GetTables>(TablesActionsType.GET_TABLES),
+        tap(() => loading()),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: GetTables) => this.tablesService.getTables().pipe(
+            tap(() => loaded()),
             map(tables => new GetTablesSuccess(tables)),
             catchError(err => of(new AddError(err.error)))
         ))
@@ -35,8 +38,10 @@ export class TablesEffects {
     @Effect()
     getTable$: Observable<TablesAction> = this.action$.pipe(
         ofType<GetTable>(TablesActionsType.GET_TABLE),
+        tap(() => loading()),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: GetTable) => this.tablesService.getTable(action.payload).pipe(
+            tap(() => loaded()),
             map(table => new GetTableSuccess(table)),
             catchError(err => of(new AddError(err.error)))
         ))
@@ -45,8 +50,10 @@ export class TablesEffects {
     @Effect()
     createTable$: Observable<TablesAction> = this.action$.pipe(
         ofType<CreateTable>(TablesActionsType.CREATE_TABLE),
+        tap(() => loading()),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: CreateTable) => this.tablesService.createTable(action.payload).pipe(
+            tap(() => loaded()),
             map(table => {
                 this.toastService.showMessage({
                     title: 'Table Creation',
@@ -64,8 +71,10 @@ export class TablesEffects {
     @Effect()
     updateTable$: Observable<TablesAction> = this.action$.pipe(
         ofType<UpdateTable>(TablesActionsType.UPDATE_TABLE),
+        tap(() => loading()),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: UpdateTable) => this.tablesService.updateTable(action.payload._id, action.payload.data).pipe(
+            tap(() => loaded()),
             map(edited => {
                 this.toastService.showMessage({
                     title: 'Table Update',
@@ -83,6 +92,7 @@ export class TablesEffects {
     @Effect()
     deleteTable$: Observable<TablesAction> = this.action$.pipe(
         ofType<DeleteTable>(TablesActionsType.DELETE_TABLE),
+        tap(() => loading()),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: DeleteTable) => this.tablesService.deleteTable(action.payload).pipe(
             map(data => {
@@ -105,8 +115,10 @@ export class TablesEffects {
     @Effect()
     createTableColumn$: Observable<TablesAction> = this.action$.pipe(
         ofType<CreateTableColumn>(TablesActionsType.CREATE_TABLE_COLUMN),
+        tap(() => loading()),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: CreateTableColumn) => this.tablesService.createTableColumn(action.payload._id, action.payload.data).pipe(
+            tap(() => loaded()),
             map(column => {
                 this.toastService.showMessage({
                     title: 'Create column',
@@ -125,8 +137,10 @@ export class TablesEffects {
     @Effect()
     updateTableColumn$: Observable<TablesAction> = this.action$.pipe(
         ofType<UpdateTableColumn>(TablesActionsType.UPDATE_TABLE_COLUMN),
+        tap(() => loading()),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: UpdateTableColumn) => this.tablesService.updateTableColumn(action.payload._id, action.payload.column_id, action.payload.data).pipe(
+            tap(() => loaded()),
             map(column => {
                 this.toastService.showMessage({
                     title: 'Update column',
@@ -143,8 +157,10 @@ export class TablesEffects {
     @Effect()
     cloneTableColumn$: Observable<TablesAction> = this.action$.pipe(
         ofType<CloneTableColumn>(TablesActionsType.CLONE_TABLE_COLUMN),
+        tap(() => loading()),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: CloneTableColumn) => this.tablesService.cloneTableColumn(action.payload._id, action.payload.data).pipe(
+            tap(() => loaded()),
             map(table => {
                 this.toastService.showMessage({
                     title: 'Clone column',
@@ -161,8 +177,10 @@ export class TablesEffects {
     @Effect()
     deleteTableColumn$: Observable<TablesAction> = this.action$.pipe(
         ofType<DeleteTableColumn>(TablesActionsType.DELETE_TABLE_COLUMN),
+        tap(() => loading()),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: DeleteTableColumn) => this.tablesService.deleteTableColumn(action.payload._id, action.payload.column_id).pipe(
+            tap(() => loaded()),
             map(data => {
                 this.toastService.showMessage({
                     type: 'success',
@@ -180,8 +198,10 @@ export class TablesEffects {
     @Effect()
     createTableRow$: Observable<TablesAction> = this.action$.pipe(
         ofType<CreateTableRow>(TablesActionsType.CREATE_TABLE_ROW),
+        tap(() => loading()),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: CreateTableRow) => this.tablesService.createTableRow(action.payload._id, action.payload.data).pipe(
+            tap(() => loaded()),
             map(row => {
                 this.toastService.showMessage({
                     title: 'Create row',
@@ -198,8 +218,10 @@ export class TablesEffects {
     @Effect()
     updateTableRow$: Observable<TablesAction> = this.action$.pipe(
         ofType<UpdateTableRow>(TablesActionsType.UPDATE_TABLE_ROW),
+        tap(() => loading()),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: UpdateTableRow) => this.tablesService.updateTableRow(action.payload._id, action.payload.row_id, action.payload.data).pipe(
+            tap(() => loaded()),
             map(row => {
                 this.toastService.showMessage({
                     title: 'Update row',
@@ -216,8 +238,10 @@ export class TablesEffects {
     @Effect()
     deleteTableRow$: Observable<TablesAction> = this.action$.pipe(
         ofType<DeleteTableRow>(TablesActionsType.DELETE_TABLE_ROW),
+        tap(() => loading()),
         tap(() => this.store.dispatch(new RemoveError)),
         mergeMap((action: DeleteTableRow) => this.tablesService.deleteTableRow(action.payload._id, action.payload.row_id).pipe(
+            tap(() => loaded()),
             map(data => {
                 this.toastService.showMessage({
                     type: 'success',
