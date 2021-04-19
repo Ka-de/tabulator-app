@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { AppState } from '@app/store';
+import { environment } from '@env/environment';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { PopupService } from '../popup';
@@ -17,6 +18,7 @@ import { selectAllTables } from './tables/tables-store/tables.selector';
   styleUrls: ['./lists.component.scss']
 })
 export class ListsComponent implements OnInit {
+  appName = environment.name;
   tables!: Table[];
 
   subscriptions = new Subscription();

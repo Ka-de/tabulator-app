@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  api: 'https://crater-server.herokuapp.com'
+  api: 'https://crater-server.herokuapp.com',
+  name: "CraterList"
 };
