@@ -25,12 +25,13 @@ body {
     color: var(--major-color);
     top: 0;
     right: 0;
+    bottom: 0;
 
     &-item {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 1vw 1vh;
+        margin: 0vh min(1vw, 10px);
         cursor: pointer;
     }
 
