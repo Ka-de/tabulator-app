@@ -37,6 +37,19 @@ import { CloneColumnComponent } from './tables/components/columns/clone-column/c
 import { CloneRowComponent } from './tables/components/rows/clone-row/clone-row.component';
 import { SelectColumnComponent } from './tables/components/columns/column-attributes/select-column/select-column.component';
 import { TableSelectTypeComponent } from './tables/components/rows/datatypes/table-select-type/table-select-type.component';
+import { TableImageTypeComponent } from './tables/components/rows/datatypes/table-image-type/table-image-type.component';
+import { CellsComponent } from './tables/components/cells/cells.component';
+import { TextCellComponent } from './tables/components/cells/text-cell/text-cell.component';
+import { LongtextCellComponent } from './tables/components/cells/longtext-cell/longtext-cell.component';
+import { MoneyCellComponent } from './tables/components/cells/money-cell/money-cell.component';
+import { ImageCellComponent } from './tables/components/cells/image-cell/image-cell.component';
+import { UrlCellComponent } from './tables/components/cells/url-cell/url-cell.component';
+import { TimeCellComponent } from './tables/components/cells/time-cell/time-cell.component';
+import { DateCellComponent } from './tables/components/cells/date-cell/date-cell.component';
+import { DatetimeCellComponent } from './tables/components/cells/datetime-cell/datetime-cell.component';
+import { SelectCellComponent } from './tables/components/cells/select-cell/select-cell.component';
+import { NumberCellComponent } from './tables/components/cells/number-cell/number-cell.component';
+import { BooleanCellComponent } from './tables/components/cells/boolean-cell/boolean-cell.component';
 
 const routes: Routes = [
   {
@@ -84,7 +97,20 @@ const routes: Routes = [
     CloneColumnComponent,
     CloneRowComponent,
     SelectColumnComponent,
-    TableSelectTypeComponent
+    TableSelectTypeComponent,
+    TableImageTypeComponent,
+    CellsComponent,
+    TextCellComponent,
+    LongtextCellComponent,
+    MoneyCellComponent,
+    ImageCellComponent,
+    UrlCellComponent,
+    TimeCellComponent,
+    DateCellComponent,
+    DatetimeCellComponent,
+    SelectCellComponent,
+    NumberCellComponent,
+    BooleanCellComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,4 @@
+<span class="image">
+    <label class="image-label">{{column.name}} {{ column.required ? '*': ''}}</label>
+    <input #input class="image-value" type="url" (change)="changed(input)" [value]="data ? data.url: ''">
+</span>

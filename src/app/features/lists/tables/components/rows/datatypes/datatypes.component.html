@@ -27,3 +27,6 @@
 
 <app-table-url-type *ngIf="isType(column.datatype, 'url')" [column]="column" (event)="changed($event)" [data]="data">
 </app-table-url-type>
+
+<app-table-image-type *ngIf="isType(column.datatype, 'image')" [column]="column" (event)="changed($event)" [data]="data">
+</app-table-image-type>

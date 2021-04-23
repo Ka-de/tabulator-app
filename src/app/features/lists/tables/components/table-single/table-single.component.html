@@ -87,7 +87,9 @@
                 <tr class="table-single-main-list-tbody-tr" *ngFor="let row of rows" #TableRow
                     (mouseenter)="selectedRow = row; displayRowOptions = true" (mouseleave)="displayRowOptions = false">
                     <td class="table-single-main-list-tbody-tr-td" *ngFor="let column of table.columns">
-                        {{displayCell(row[column.name], column)}}</td>
+                        <app-cells [column]="column" [data]="row[column.name]">
+                        </app-cells>
+                    </td>
                     <span *ngIf="showRowOptions(row)" class="table-options">
                         <i class="table-options-item fa fa-pencil"
                             (click)="popupService.open('edit-row', {'table': table, 'row': row});"></i>

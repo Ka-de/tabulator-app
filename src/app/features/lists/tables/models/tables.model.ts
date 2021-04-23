@@ -17,12 +17,12 @@ export enum TableDataTypes {
     MONEY = "money",
     URL = "url",
     SELECT = "select",
+    IMAGE = "image",
 
     // LOOKUP = "lookup",    
     // FORMULAR = "formular",
     // COLLECTION = "collection",
 
-    // IMAGE = "image",
 }
 
 export interface Table extends TableEditable {

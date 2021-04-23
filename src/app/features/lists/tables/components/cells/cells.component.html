@@ -1,0 +1,32 @@
+<app-text-cell *ngIf="isType(column.datatype, 'text')" [data]="data">
+</app-text-cell>
+
+<app-select-cell *ngIf="isType(column.datatype, 'select')" [data]="data">
+</app-select-cell>
+
+<app-longtext-cell *ngIf="isType(column.datatype, 'longtext')" [data]="data">
+</app-longtext-cell>
+
+<app-number-cell *ngIf="isType(column.datatype, 'number')" [data]="data">
+</app-number-cell>
+
+<app-boolean-cell *ngIf="isType(column.datatype, 'boolean')" [data]="data">
+</app-boolean-cell>
+
+<app-date-cell *ngIf="isType(column.datatype, 'date')" [data]="data">
+</app-date-cell>
+
+<app-time-cell *ngIf="isType(column.datatype, 'time')" [data]="data">
+</app-time-cell>
+
+<app-datetime-cell *ngIf="isType(column.datatype, 'datetime')" [data]="data">
+</app-datetime-cell>
+
+<app-money-cell *ngIf="isType(column.datatype, 'money')" [data]="data">
+</app-money-cell>
+
+<app-url-cell *ngIf="isType(column.datatype, 'url')" [data]="data">
+</app-url-cell>
+
+<app-image-cell *ngIf="isType(column.datatype, 'image')" [data]="data">
+</app-image-cell>

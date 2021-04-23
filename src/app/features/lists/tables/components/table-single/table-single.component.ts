@@ -89,6 +89,9 @@ export class TableSingleComponent implements OnInit {
           return `[${data.join(', ')}]`
         }
       }
+      if (column.datatype == TableDataTypes.IMAGE) {
+        return data.url;
+      }
     }
     return data;
   }
