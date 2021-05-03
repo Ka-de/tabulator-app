@@ -5,17 +5,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ListsService } from './features/lists/lists.service';
-import { TablesService } from './features/lists/tables/tables.service';
-import { TableResolver } from './features/lists/tables/tables.resolver';
-import { ToastComponent } from './features/toast/toast.component';
-import { ToastService } from './features/toast/toast.service';
+import { ListsService } from '@app/features/lists/lists.service';
+import { TablesService } from '@app/features/tables/tables.service';
+import { TableResolver } from '@app/features/tables/tables.resolver';
+import { ToastComponent } from '@app/features/toast/toast.component';
+import { ToastService } from '@app/features/toast/toast.service';
 import { AppStoreModule } from './store/app-store.module';
 import { SharedModule } from './utils/shared.module';
-import { NotFoundComponent } from './features/not-found/not-found.component';
-import { PopupService } from './features/popup';
-import { HomeComponent } from './features/home/home.component';
+import { NotFoundComponent } from '@app/features/not-found/not-found.component';
+import { PopupService } from '@app/features/popup';
+import { HomeComponent } from '@app/features/home/home.component';
 import { ValidateRow } from './utils/row.validator';
+import { RowService } from './features/rows/rows.service';
+import { ColumnService } from './features/columns/columns.service';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { ValidateRow } from './utils/row.validator';
     ToastService,
     TableResolver,
     TablesService,
+    RowService,
+    ColumnService,
     ListsService,
     PopupService,
     ValidateRow

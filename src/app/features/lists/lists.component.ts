@@ -5,12 +5,12 @@ import { environment } from '@env/environment';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { PopupService } from '../popup';
-import { TableCreateComponent } from './tables/components/table-create/table-create.component';
-import { TableDeleteComponent } from './tables/components/table-delete/table-delete.component';
-import { TableEditComponent } from './tables/components/table-edit/table-edit.component';
-import { Table } from './tables/models/tables.model';
-import { DeleteTable, GetTables } from './tables/tables-store/tables.action';
-import { selectAllTables } from './tables/tables-store/tables.selector';
+import { Table } from '../tables/models/tables.model';
+import { TableCreateComponent } from '../tables/table-create/table-create.component';
+import { TableDeleteComponent } from '../tables/table-delete/table-delete.component';
+import { TableEditComponent } from '../tables/table-edit/table-edit.component';
+import { GetTables } from '../tables/tables-store/tables.action';
+import { selectAllTables } from '../tables/tables-store/tables.selector';
 
 @Component({
   selector: 'app-lists',

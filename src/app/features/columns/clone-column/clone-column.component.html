@@ -1,0 +1,38 @@
+<form (submit)="cloneColumn()" class="column-form" [formGroup]="columnForm">
+    <div class="column-form-inputs">
+        <span class="column-form-inputs-group">
+            <label class="column-forms-inputs-group-label">Name *</label>
+            <input class="column-form-inputs-group-text" formControlName="name">
+        </span>
+        <span class="column-form-inputs-group">
+            <label class="column-forms-inputs-group-label">Description</label>
+            <input class="column-form-inputs-group-text" formControlName="description">
+        </span>
+        <span class="column-form-inputs-group">
+            <label class="column-forms-inputs-group-label">Type</label>
+            <select #ColumnType class="column-form-inputs-group-select" formControlName="datatype"
+                (change)="type=ColumnType.value">
+                <option *ngFor="let type of dataTypes" [selected]="type == data.column.datatype">{{type}}</option>
+            </select>
+
+            <app-column-attributes [type]="type" (update)="setAttributes($event)" [attributes]="data.column.attributes">
+            </app-column-attributes>
+        </span>
+        <span class="column-form-inputs-group">
+            <label class="column-forms-inputs-group-label">Required</label>
+            <input class="column-form-inputs-group-checkbox" type="checkbox" formControlName="required">
+        </span>
+        <span class="column-form-inputs-group">
+            <label class="column-forms-inputs-group-label">Unique</label>
+            <input class="column-form-inputs-group-checkbox" type="checkbox" formControlName="unique">
+        </span>
+        <span *ngIf="originalType == type" class="column-form-inputs-group">
+            <label class="column-forms-inputs-group-label">With Rows</label>
+            <input class="column-form-inputs-group-checkbox" type="checkbox" formControlName="withrows">
+        </span>
+    </div>
+    <div class="column-form-controls">
+        <button type="button" (click)="cloneColumn()" class="column-form-controls-button" [disabled]="columnForm.invalid">Update</button>
+        <button type="button" class="column-form-controls-button" (click)="close()">Cancel</button>
+    </div>
+</form>

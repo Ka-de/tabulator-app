@@ -1,6 +1,6 @@
-import { TableRowDTO } from "@app/features/lists/tables/dtos/tables-row.dto";
-import { TableColumn } from "@app/features/lists/tables/models/tables-column.model";
-import { Table, TableDataTypes } from "@app/features/lists/tables/models/tables.model";
+import { Column } from "@app/features/columns/models/tables-column.model";
+import { RowDTO } from "@app/features/rows/models/tables-row.dto";
+import { Table, TableDataTypes } from "@app/features/tables/models/tables.model";
 import { Entity } from "./custom.type";
 
 export class ValidateRow {
@@ -8,10 +8,10 @@ export class ValidateRow {
     ) { }
 
     async validate(
-        data: TableRowDTO | Partial<TableRowDTO>,
+        data: RowDTO | Partial<RowDTO>,
         table: Table
     ) {
-        const columnEntity: Entity<TableColumn> = table.columns.reduce((acc, column) =>
+        const columnEntity: Entity<Column> = table.columns.reduce((acc, column) =>
             ({ ...acc, [column.name]: column }), {});
         for (let i in columnEntity) {
             if (columnEntity[i].unique) {
@@ -40,7 +40,7 @@ export class ValidateRow {
         return data;
     }
 
-    isRequired(data: any, column: TableColumn) {
+    isRequired(data: any, column: Column) {
         if (column.required && !data && data !== 0) {
             return Promise.reject(`${column.name} is required in table row`);
         }
@@ -48,7 +48,7 @@ export class ValidateRow {
         return;
     }
 
-    isType(data: any, column: TableColumn) {
+    isType(data: any, column: Column) {
         if (!data && !column.required) return;
 
         if (column.datatype == TableDataTypes.TEXT) {
